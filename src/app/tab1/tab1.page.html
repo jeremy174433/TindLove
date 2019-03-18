@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Tab One
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    
+  <ion-item *ngFor="let people of peoples">
+    <ion-avatar slot="start">
+      <img [src]="people.picture.medium" alt="">
+    </ion-avatar>
+    <ion-label>
+      <h2>{{ people.name.first }} {{ people.name.last }}</h2>
+      <p>{{ people.email }}</p>
+    </ion-label>
+  </ion-item>
+
+</ion-content>
