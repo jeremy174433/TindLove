@@ -10,7 +10,7 @@ export class PeoplesService {
   constructor(public http: HttpClient) { }
 
   getPeoples() {
-    return this.http.get('https://randomuser.me/api/?results=30');
+    return this.http.get('https://randomuser.me/api/?nat=us&results=50');
   }
   
 }
