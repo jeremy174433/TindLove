@@ -16,9 +16,13 @@ export class HomePage {
 
   constructor(
     private PeoplesService: PeoplesService,
-    public modalCtrl: ModalController) { }
+    public modalCtrl: ModalController) { 
+      this.DisplayData();
+    }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  DisplayData() {
     // Call API
     this.PeoplesService.getPeoples()
     .subscribe(
@@ -41,6 +45,31 @@ export class HomePage {
     return await modal.present();
   }
 
+  // Pull to refresh
+  doRefresh(event) {
+    setTimeout(() => {
+      this.DisplayData();
+      event.target.complete();
+    }, 500);
+  }
+  
+  // Infinite scroll
+  loadMore(event) {
+     this.PeoplesService.getPeoples()
+     .subscribe(
+      (data) => {
+        // Success
+        for(const peoples of data['results']) {
+          this.peoples.push(peoples);
+        }
+        event.target.complete();
+      },
+      (error) => {
+        console.error(error);
+      }
+    ).unsubscribe;
+  }
+  
 }
 
 
