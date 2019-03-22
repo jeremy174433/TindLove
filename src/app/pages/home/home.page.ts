@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
-import { PeoplesService } from '../services/peoples-service/peoples.service';
-import { DetailsPage } from '../pages/details/details.page';
+import { PeoplesService } from '../../services/peoples-service/peoples.service';
+import { DetailsPage } from '../details/details.page';
 
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss'],
+  selector: 'app-home',
+  templateUrl: 'home.page.html',
+  styleUrls: ['home.page.scss'],
   providers: [PeoplesService]
 })
-export class Tab1Page {
+export class HomePage {
 
   peoples = [];
 
