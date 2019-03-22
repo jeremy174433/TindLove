@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title>{{ people.name.first }} {{ people.name.last }}</ion-title>
     <ion-button slot="end" fill="clear" (click)="dismiss()">
-      <ion-icon name="close"></ion-icon>
+      <ion-icon name="close" slot="icon-only"></ion-icon>
     </ion-button>
   </ion-toolbar>
 </ion-header>
@@ -13,29 +13,29 @@
     <ion-item id="item-header">
       <ion-avatar>
         <ion-img [src]="people.picture.large" [alt]="people.name.first + ' ' + people.name.last"></ion-img>
-      </ion-avatar>
-      <h1>{{ people.name.first }} {{ people.name.last }}</h1>
+        <h1>{{ people.name.first }} {{ people.name.last }}</h1>
+      </ion-avatar>      
     </ion-item>
     <ion-card-content>
-      <div>
-        <ion-button (click)="addToFavorites()" id="favorites-button" title="Like this profile">
+      <div class="ion-text-end">
+        <ion-button shape="round" color="primary" size="small" (click)="addToFavorites()" id="favorites-button" title="Like this profile">
           <ion-icon name="heart-empty"></ion-icon>
         </ion-button>
       </div>
       <ion-item>
-        <ion-icon name="locate" item-left></ion-icon>
+        <ion-icon name="locate" item-left class="ion-margin-end"></ion-icon>
         <p>{{ people.location.city }}, {{ people.location.state }}</p>
       </ion-item>
       <ion-item>
-        <ion-icon name="call" item-left></ion-icon>
+        <ion-icon name="call" item-left class="ion-margin-end"></ion-icon>
         <p>{{ people.phone }}</p>
       </ion-item>
       <ion-item>
-        <ion-icon name="mail" item-left></ion-icon>
+        <ion-icon name="mail" item-left class="ion-margin-end"></ion-icon>
         <p>{{ people.email }}</p>
       </ion-item>
       <ion-item>
-        <ion-icon name="calendar" item-left></ion-icon>
+        <ion-icon name="calendar" item-left class="ion-margin-end"></ion-icon>
         <p>{{ people.dob.age }} years old</p>
       </ion-item>
     </ion-card-content>

@@ -20,6 +20,7 @@ ion-card {
             width: 75px;
             height: 75px;
             background-color: var(--ion-color-light);
+            pointer-events: none;
         }
     }
     
