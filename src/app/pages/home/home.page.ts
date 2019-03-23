@@ -22,8 +22,8 @@ export class HomePage {
 
   ngOnInit() { }
 
+  // Call API
   DisplayData() {
-    // Call API
     this.PeoplesService.getPeoples()
     .subscribe(
       (data) => {

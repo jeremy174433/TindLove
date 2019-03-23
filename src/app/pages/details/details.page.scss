@@ -9,8 +9,6 @@ ion-button:hover {
     border-radius: 2px;
 }
 
-.bg-m { background-image: url(../../../assets/imgs/background-m.jpg); }
-.bg-f { background-image: url(../../../assets/imgs/background-f.jpg); }
 #item-header {
     background-repeat: no-repeat;
     background-size: cover;
@@ -19,6 +17,9 @@ ion-button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    &.bg-m { background-image: url(../../../assets/imgs/background-m.jpg); }
+    &.bg-f { background-image: url(../../../assets/imgs/background-f.jpg); }
     
     ion-avatar {
         width: 100%;
@@ -57,6 +58,15 @@ ion-card-content {
         }
     }
 
-    ion-icon { color: var(--ion-color-primary); }
+    ion-icon { color: var(--ion-color-primary); } // Global icon of the modal
+
+    ion-item {
+        
+        p {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+    }
 }
 

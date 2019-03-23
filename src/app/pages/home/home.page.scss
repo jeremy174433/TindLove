@@ -4,13 +4,14 @@ ion-item {
     --background: transparent;
 }
 
-.bg-m { background-image: url(../../../assets/imgs/background-m.jpg); }
-.bg-f { background-image: url(../../../assets/imgs/background-f.jpg); }
 ion-card {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     cursor: pointer;
+
+    &.bg-m { background-image: url(../../../assets/imgs/background-m.jpg); }
+    &.bg-f { background-image: url(../../../assets/imgs/background-f.jpg); }
 
     ion-avatar {
         width: 100%;
