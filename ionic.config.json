@@ -1,5 +1,7 @@
 {
   "name": "TindLove",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

@@ -10,7 +10,7 @@
 <ion-content padding>
   
   <ion-card>
-    <ion-item id="item-header">
+    <ion-item id="item-header" [ngClass]="{'bg-m' : people.gender === 'male', 'bg-f' : people.gender === 'female'}">
       <ion-avatar>
         <ion-img [src]="people.picture.large" [alt]="people.name.first + ' ' + people.name.last"></ion-img>
         <h1>{{ people.name.first }} {{ people.name.last }}</h1>

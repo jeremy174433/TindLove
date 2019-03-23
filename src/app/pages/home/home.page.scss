@@ -4,8 +4,9 @@ ion-item {
     --background: transparent;
 }
 
+.bg-m { background-image: url(../../../assets/imgs/background-m.jpg); }
+.bg-f { background-image: url(../../../assets/imgs/background-f.jpg); }
 ion-card {
-    background-image: url(../../../assets/imgs/background.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
