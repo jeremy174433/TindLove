@@ -16,13 +16,12 @@ export class AuthGuard implements CanActivate  {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean | Observable<boolean> | Promise<boolean> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       firebase.auth().onAuthStateChanged((user: firebase.User) => {
         if(user) {
           resolve(true);
         }
         else {
-          console.log('User is not logged in');
           this.router.navigate(['/sign-in']);
           resolve(false);
         }
