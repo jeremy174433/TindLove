@@ -23,6 +23,12 @@ ion-item {
 
     form { 
         .form-item { padding: 15px 0; }
+        ion-label { 
+            display: flex;
+            align-items: center; 
+
+            ion-icon.ion-margin-end { margin-inline-end: var(--ion-margin, 7px); }
+        }
         p.error-message { font-size: 13px; }
     }
 }

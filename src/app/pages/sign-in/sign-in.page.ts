@@ -39,7 +39,8 @@ export class SignInPage implements OnInit {
   async loginUser(loginForm: FormGroup): Promise<void> {
     if (!loginForm.valid) {
       console.log('Form is not valid yet, current value:', loginForm.value);
-    } else {
+    }
+    else {
       this.loading = await this.loadingCtrl.create();
       await this.loading.present();
   

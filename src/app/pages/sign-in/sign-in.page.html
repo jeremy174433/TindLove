@@ -10,11 +10,14 @@
 
     <ion-img src="../assets/icons/logo.svg"></ion-img>
 
-    <form [formGroup]="loginForm" class="form">
+    <form [formGroup]="loginForm">
 
       <div class="form-item">
         <ion-item>
-          <ion-label position="floating" color="primary">Email</ion-label>
+          <ion-label position="floating" color="primary">
+            <ion-icon name="person" class="ion-margin-end"></ion-icon>
+            Email
+          </ion-label>
           <ion-input
             formControlName="email"
             type="email"
@@ -28,7 +31,10 @@
     
     <div class="form-item">
       <ion-item>
-        <ion-label position="floating" color="primary">Password</ion-label>
+        <ion-label position="floating" color="primary">
+          <ion-icon name="key" class="ion-margin-end"></ion-icon>
+          Password
+        </ion-label>
         <ion-input
           formControlName="password"
           type="password"
