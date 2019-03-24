@@ -3,6 +3,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { LoadingController, AlertController } from '@ionic/angular';
 import { AuthService } from '../../services/user/auth.service';
 import { Router } from '@angular/router';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 @Component({
   selector: 'app-sign-in',
@@ -15,6 +16,7 @@ export class SignInPage implements OnInit {
   public loading: HTMLIonLoadingElement;
 
   constructor(
+    private statusBar: StatusBar,
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
     private authService: AuthService,
@@ -33,7 +35,11 @@ export class SignInPage implements OnInit {
       });
     }
 
-  ngOnInit() { }
+  ngOnInit() {
+    // Status bar style - For whole the app pages
+    this.statusBar.backgroundColorByHexString('#000000');
+    this.statusBar.styleLightContent();
+  }
 
   // Sign in
   async loginUser(loginForm: FormGroup): Promise<void> {
