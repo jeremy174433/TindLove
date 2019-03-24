@@ -36,7 +36,7 @@ export class SignInPage implements OnInit {
     }
 
   ngOnInit() {
-    // Status bar style - For whole the app pages
+    // Status bar style
     this.statusBar.backgroundColorByHexString('#000000');
     this.statusBar.styleLightContent();
   }

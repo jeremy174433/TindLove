@@ -12,6 +12,7 @@ import { DetailsPage } from '../details/details.page';
 })
 export class HomePage {
 
+  data: any;
   peoples = [];
 
   constructor(
@@ -21,6 +22,13 @@ export class HomePage {
     }
 
   ngOnInit() { }
+
+  ionViewWillEnter() {
+    // Skeleton screen
+    setTimeout(() => {
+      this.data = { };
+    }, 3000);
+  }
 
   // Call API
   DisplayData() {
