@@ -28,7 +28,7 @@ export class SignInPage implements OnInit {
         ],
         password: [
           '',
-          Validators.compose([Validators.required, Validators.minLength(8)])
+          Validators.compose([Validators.required, Validators.minLength(6)])
         ]
       });
     }

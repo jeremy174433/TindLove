@@ -33,6 +33,11 @@ export class AuthService {
     });
   }
 
+  // Reset password
+  resetPassword(email:string): Promise<void> {
+    return firebase.auth().sendPasswordResetEmail(email);
+  }
+
   // Log out
   logoutUser():Promise<void> {
     return firebase.auth().signOut();

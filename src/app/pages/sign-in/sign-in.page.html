@@ -42,7 +42,7 @@
         </ion-input>
       </ion-item>
       <p class="error-message" *ngIf="!loginForm.controls['password'].valid && loginForm.controls['password'].touched">
-        <span>Your password needs more than 8 characters.</span>
+        <span>Your password needs more than 6 characters.</span>
       </p>
     </div>
     
@@ -53,6 +53,7 @@
     </form>
     
     <p class="no-account">No account yet ? <span routerLink="/sign-up">Create a new account</span></p>
+    <p class="reset-pwd">Forgot password ? <span routerLink="/reset-password">Change my password</span></p>
   </div>
 
 </ion-content>

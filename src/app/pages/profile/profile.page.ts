@@ -20,7 +20,7 @@ export class ProfilePage {
   // Log out
   async logoutUser(): Promise<void> {
     const alert = await this.alertCtrl.create({
-      message: 'Do you really want to disconnect ?',
+      message: 'Do you really want to disconnect from the app ?',
       buttons: [
         {
           text: 'No',

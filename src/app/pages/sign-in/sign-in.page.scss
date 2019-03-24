@@ -33,10 +33,11 @@ ion-item {
     }
 }
 
-.no-account span {
+.no-account span, .reset-pwd span  {
     color: var(--ion-color-primary);
     cursor: pointer;
     border-bottom: 1px solid transparent;
+    display: inline-block;
     transition: all .15s ease-in-out;
 
     &:hover { border-color: var(--ion-color-primary); }
