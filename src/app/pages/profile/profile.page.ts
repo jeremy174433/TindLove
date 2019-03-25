@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../services/user/auth.service';
 import { AlertController } from '@ionic/angular';
 
+import * as firebase from 'firebase/app';
+
 @Component({
   selector: 'app-profile',
   templateUrl: 'profile.page.html',
@@ -9,11 +11,15 @@ import { AlertController } from '@ionic/angular';
 })
 export class ProfilePage {
 
-  public loading: any;
+  userEmail;
 
   constructor(
     private authService: AuthService,
-    private alertCtrl: AlertController) { }
+    private alertCtrl: AlertController) { 
+
+      this.userEmail = firebase.auth().currentUser.email;
+
+    }
 
   ngOnInit() { }
 

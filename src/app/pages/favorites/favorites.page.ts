@@ -5,4 +5,8 @@ import { Component } from '@angular/core';
   templateUrl: 'favorites.page.html',
   styleUrls: ['favorites.page.scss']
 })
-export class FavoritesPage {}
+export class FavoritesPage {
+
+  constructor() { }
+
+}

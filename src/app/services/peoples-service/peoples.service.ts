@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PeoplesService {
 
-  constructor(public http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   getPeoples() {
     return this.http.get('https://randomuser.me/api/?nat=us&results=50');

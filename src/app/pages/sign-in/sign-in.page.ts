@@ -12,13 +12,13 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 })
 export class SignInPage implements OnInit {
 
-  public loginForm: FormGroup;
-  public loading: HTMLIonLoadingElement;
+  loginForm: FormGroup;
+  loading: HTMLIonLoadingElement;
 
   constructor(
     private statusBar: StatusBar,
-    public loadingCtrl: LoadingController,
-    public alertCtrl: AlertController,
+    private loadingCtrl: LoadingController,
+    private alertCtrl: AlertController,
     private authService: AuthService,
     private router: Router,
     private formBuilder: FormBuilder) {
@@ -33,7 +33,8 @@ export class SignInPage implements OnInit {
           Validators.compose([Validators.required, Validators.minLength(6)])
         ]
       });
-    }
+
+  }
 
   ngOnInit() {
     // Status bar style

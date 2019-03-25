@@ -17,9 +17,11 @@ export class HomePage {
 
   constructor(
     private PeoplesService: PeoplesService,
-    public modalCtrl: ModalController) { 
+    private modalCtrl: ModalController) { 
+      
       this.DisplayData();
-    }
+      
+  }
 
   ngOnInit() { }
 

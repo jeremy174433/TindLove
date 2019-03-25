@@ -11,8 +11,8 @@ import { Router } from '@angular/router';
 })
 export class SignUpPage implements OnInit {
 
-  public signupForm: FormGroup;
-  public loading: any;
+  signupForm: FormGroup;
+  loading: any;
 
   constructor(
     private authService: AuthService,
@@ -32,7 +32,7 @@ export class SignUpPage implements OnInit {
         ]
       });
 
-    }
+  }
 
   ngOnInit() { }
 

@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class ResetPasswordPage implements OnInit {
 
-  public resetPasswordForm: FormGroup;
+  resetPasswordForm: FormGroup;
 
   constructor(
     private authService: AuthService,
