@@ -24,7 +24,8 @@
           <ion-input
             formControlName="email"
             type="email"
-            [class.invalid]="!signupForm.controls['email'].valid && signupForm.controls['email'].touched">
+            [class.invalid]="!signupForm.controls['email'].valid && signupForm.controls['email'].touched"
+            (keydown.enter)="signupUser(signupForm)">
           </ion-input>
         </ion-item>
         <p class="error-message" *ngIf="!signupForm.controls['email'].valid && signupForm.controls['email'].touched">
@@ -41,7 +42,8 @@
           <ion-input
             formControlName="password"
             type="password"
-            [class.invalid]="!signupForm.controls['password'].valid && signupForm.controls['password'].touched">
+            [class.invalid]="!signupForm.controls['password'].valid && signupForm.controls['password'].touched"
+            (keydown.enter)="signupUser(signupForm)">
           </ion-input>
         </ion-item>
         <p class="error-message" *ngIf="!signupForm.controls['password'].valid && signupForm.controls['password'].touched">

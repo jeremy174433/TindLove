@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FavoritesService } from '../../services/favorites-crud/favorites.service';
 
 @Component({
   selector: 'app-favorites',
@@ -8,12 +7,8 @@ import { FavoritesService } from '../../services/favorites-crud/favorites.servic
 })
 export class FavoritesPage {
 
-  favoritesList: Array<any>; // favorites list
+  constructor() { }
 
-  constructor(public favoritesService: FavoritesService) { }
-
-  ngOnInit() {
-    this.favoritesService.getFavorites();
-  }
+  ngOnInit() { }
 
 }

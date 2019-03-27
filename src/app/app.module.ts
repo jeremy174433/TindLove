@@ -13,10 +13,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { DetailsPage } from './pages/details/details.page';
 
-import { AngularFireModule } from '@angular/fire';
-import { firebaseConfig } from './credentials';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-
 @NgModule({
   declarations: [
     AppComponent, 
@@ -29,9 +25,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     BrowserModule, 
     IonicModule.forRoot(), 
     AppRoutingModule,
-    HttpClientModule,
-    AngularFireModule.initializeApp(firebaseConfig),
-    AngularFirestoreModule
+    HttpClientModule
   ],
   providers: [
     StatusBar,
