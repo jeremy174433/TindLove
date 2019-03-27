@@ -12,6 +12,7 @@ import { firebaseConfig } from './credentials';
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
+  
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,

@@ -39,8 +39,13 @@ export class AuthService {
   }
 
   // Log out
-  logoutUser():Promise<void> {
+  logoutUser(): Promise<void> {
     return firebase.auth().signOut();
+  }
+
+  // Delete current user
+  deleteAccount(): Promise<void> {
+    return firebase.auth().currentUser.delete();
   }
 
 }

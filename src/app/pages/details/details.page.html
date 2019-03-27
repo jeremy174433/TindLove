@@ -18,8 +18,9 @@
     </ion-item>
     <ion-card-content>
       <div class="ion-text-end">
-        <ion-button shape="round" color="primary" size="small" (click)="addToFavorites()" id="favorites-button" title="Like this profile">
+        <ion-button shape="round" color="primary" size="small" (click)="addToFavorites()" id="favorites-button">
           <ion-icon name="heart-empty"></ion-icon>
+         <!--<ion-icon [name]="favorite ? 'heart' : 'heart-empty'"></ion-icon>--->
         </ion-button>
       </div>
       <ion-item>

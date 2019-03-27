@@ -8,11 +8,21 @@
 
   <h1>Profile Page</h1>
 
-  <p>Email : <ion-label color="primary">{{ userEmail }}</ion-label></p>
+  <p>ID : <ion-label color="primary">{{ user.uid }}</ion-label></p>
+  <p>Email : <ion-label color="primary">{{ user.email }}</ion-label></p>
 
-  <ion-button (click)="logoutUser()">
-    <ion-icon slot="start" name="log-out"></ion-icon>
-    Log out
-  </ion-button>
+  <div>
+    <ion-button (click)="logoutUser()">
+      <ion-icon slot="start" name="log-out"></ion-icon>
+      Log out
+    </ion-button>
+  </div>
+
+  <div>
+    <ion-button (click)="deleteAccount()">
+      <ion-icon slot="start" name="remove-circle"></ion-icon>
+      Delete account
+    </ion-button>
+  </div>
 
 </ion-content>
