@@ -13,7 +13,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 export class SignInPage implements OnInit {
 
   loginForm: FormGroup;
-  loading: HTMLIonLoadingElement;
+  private loading: HTMLIonLoadingElement;
 
   constructor(
     private statusBar: StatusBar,

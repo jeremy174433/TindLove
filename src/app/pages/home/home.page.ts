@@ -7,13 +7,13 @@ import { DetailsPage } from '../details/details.page';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
-  providers: [PeoplesService]
+  styleUrls: ['home.page.scss']
 })
 export class HomePage {
 
+  api = this.PeoplesService.getPeoples();
   data: any;
-  peoples = [];
+  private peoples = [];
 
   constructor(
     private PeoplesService: PeoplesService,
@@ -25,6 +25,11 @@ export class HomePage {
 
   ngOnInit() { }
 
+  // Disable back button on tabs page to not return on sign-in page after user authentification
+  ionViewCanLeave() {
+    return false;
+  }
+
   ionViewWillEnter() {
     // Skeleton screen
     setTimeout(() => {
@@ -34,7 +39,7 @@ export class HomePage {
 
   // Call API
   DisplayData() {
-    this.PeoplesService.getPeoples()
+    this.api
     .subscribe(
       (data) => {
         // Success
@@ -65,7 +70,7 @@ export class HomePage {
   
   // Infinite scroll
   loadMore(event) {
-     this.PeoplesService.getPeoples()
+     this.api
      .subscribe(
       (data) => {
         // Success
@@ -81,5 +86,3 @@ export class HomePage {
   }
   
 }
-
-

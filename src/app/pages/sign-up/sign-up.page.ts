@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class SignUpPage implements OnInit {
 
   signupForm: FormGroup;
-  loading: any;
+  private loading: HTMLIonLoadingElement;
 
   constructor(
     private authService: AuthService,

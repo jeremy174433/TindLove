@@ -35,10 +35,11 @@ ion-item {
             ion-icon.ion-margin-end { margin-inline-end: var(--ion-margin, 7px); }
         }
         p.error-message { font-size: 13px; }
+
     }
 }
 
-.already-account {
+.already-account, .privacy-policy {
     font-size: 14px;
 
     span {

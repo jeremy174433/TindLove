@@ -25,4 +25,22 @@
     </ion-button>
   </div>
 
+  <!-- Preferences -->
+  <form [formGroup]="preferencesForm">
+
+    <h2>Preferences :</h2>
+
+    <ion-item>
+      <ion-label>Gender</ion-label>
+      <ion-select formControlName="gender">
+        <ion-select-option value="all">All</ion-select-option>
+        <ion-select-option value="male">Male</ion-select-option>
+        <ion-select-option value="female">Female</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-button expand="block" (click)="savePreferences(preferencesForm)" [disabled]="!preferencesForm.valid">Save preferences</ion-button>
+
+  </form>
+
 </ion-content>
