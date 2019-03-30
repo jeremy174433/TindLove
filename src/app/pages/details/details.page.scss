@@ -44,22 +44,6 @@ ion-button:hover {
 
 ion-card-content {
 
-    position: relative;
-    top: -45px;
-
-    #favorites-button {
-        border-radius: 50%;
-        height: 50px;
-        width: 50px;
-
-        ion-icon {
-            font-size: 22px;
-            color: var(--ion-color-light);
-        }
-    }
-
-    ion-icon { color: var(--ion-color-primary); } // Global icon of the modal
-
     ion-item {
         
         p {
@@ -67,6 +51,30 @@ ion-card-content {
             white-space: nowrap;
             overflow: hidden;
         }
+
+        ion-icon { color: var(--ion-color-primary); } // Global icon of the modal
     }
+
+    #button-wrapper {
+        margin-top: 30px;
+
+        #favorites-button, #cancel-button {
+            border-radius: 50%;
+            height: 50px;
+            width: 50px;
+            transition: .25s ease-in-out;
+
+            &:hover { transform: scale(1.1) }
+    
+            ion-icon { 
+                font-size: 22px; 
+                color: var(--ion-color-light);
+            }
+
+            &#favorites-button { background: var(--ion-color-success); }
+        }
+    
+    }
+
 }
 

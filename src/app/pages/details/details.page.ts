@@ -27,8 +27,8 @@ export class DetailsPage implements OnInit {
   async addToFavorites() {
     // this.favorite = !this.favorite; // Icon background favorite
     console.log('Favorites button clicked !');
+    this.modalCtrl.dismiss();
 
-    
     const toast = await this.toastController.create({
       message: 'Added to favorites',
       showCloseButton: true,
@@ -37,7 +37,6 @@ export class DetailsPage implements OnInit {
       duration: 2000
     });
     toast.present();
-    
   }
 
 }

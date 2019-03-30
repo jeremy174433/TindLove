@@ -16,7 +16,7 @@ export class ProfilePage {
 
   user: any;
   private loading: HTMLIonLoadingElement;
-  preferencesForm: FormGroup;
+  preferencesGender: FormGroup;
 
   constructor(
     private authService: AuthService,
@@ -25,11 +25,11 @@ export class ProfilePage {
     private alertCtrl: AlertController,
     private router: Router,
     private toastController: ToastController,
-    private formBuilder: FormBuilder,) { 
+    private formBuilder: FormBuilder) { 
     
     this.user = firebase.auth().currentUser;
 
-    this.preferencesForm = this.formBuilder.group({
+    this.preferencesGender = this.formBuilder.group({
       gender: [
         '',
         Validators.compose([Validators.required])
@@ -106,32 +106,30 @@ export class ProfilePage {
   }
 
   // Preferences
-  async savePreferences(preferencesForm: FormGroup): Promise<void> {
-    if (!preferencesForm.valid) {
-      console.log('Need to complete the form, current value: ', preferencesForm.value);
+  async savePreferences(preferencesGender: FormGroup) {
+    if (!preferencesGender.valid) {
+      console.log('Need to complete the form, current value: ', preferencesGender.value);
     }
     else {
       this.loading = await this.loadingCtrl.create();
 
       const toast = await this.toastController.create({
-        message: 'Your preferences has been saved : ' + preferencesForm.value.gender,
+        message: 'Your preferences has been saved : ' + preferencesGender.value.gender,
         showCloseButton: true,
         position: 'bottom',
         closeButtonText: 'x',
         duration: 3000
       });
   
-      const gender: string = preferencesForm.value.gender;
+      const gender: string = preferencesGender.value.gender;
 
       this.loading.present();
       setTimeout(() => {
         this.loading.dismiss();
-        console.log('go to profile service...');
-        this.profileService.preferencesForm(gender);
-        preferencesForm.reset();
+        this.profileService.preferencesGender(gender);
+        preferencesGender.reset();
         toast.present();
       }, 1000);
-
     }
   }
 

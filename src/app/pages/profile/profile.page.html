@@ -10,6 +10,8 @@
 
   <p>ID : <ion-label color="primary">{{ user.uid }}</ion-label></p>
   <p>Email : <ion-label color="primary">{{ user.email }}</ion-label></p>
+  <p>Kind of research : <ion-label color="primary">All</ion-label></p>
+  <p>Kind of research : <ion-label color="primary">{{ user.gender }}</ion-label></p>
 
   <div>
     <ion-button (click)="logoutUser()">
@@ -26,7 +28,7 @@
   </div>
 
   <!-- Preferences -->
-  <form [formGroup]="preferencesForm">
+  <form [formGroup]="preferencesGender">
 
     <h2>Preferences :</h2>
 
@@ -39,7 +41,7 @@
       </ion-select>
     </ion-item>
 
-    <ion-button expand="block" (click)="savePreferences(preferencesForm)" [disabled]="!preferencesForm.valid">Save preferences</ion-button>
+    <ion-button expand="block" (click)="savePreferences(preferencesGender)" [disabled]="!preferencesGender.valid">Save preferences</ion-button>
 
   </form>
 
