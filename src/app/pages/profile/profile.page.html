@@ -8,10 +8,8 @@
 
   <h1>Profile Page</h1>
 
-  <p>ID : <ion-label color="primary">{{ user.uid }}</ion-label></p>
-  <p>Email : <ion-label color="primary">{{ user.email }}</ion-label></p>
-  <p>Kind of research : <ion-label color="primary">All</ion-label></p>
-  <p>Kind of research : <ion-label color="primary">{{ user.gender }}</ion-label></p>
+  <p>Email : <ion-label color="primary">{{ user?.email }}</ion-label></p>
+  <p>Looking for : <ion-label color="primary">{{ user?.gender }}</ion-label></p>
 
   <div>
     <ion-button (click)="logoutUser()">
@@ -35,9 +33,9 @@
     <ion-item>
       <ion-label>Gender</ion-label>
       <ion-select formControlName="gender">
-        <ion-select-option value="all">All</ion-select-option>
-        <ion-select-option value="male">Male</ion-select-option>
-        <ion-select-option value="female">Female</ion-select-option>
+        <ion-select-option value="All">All</ion-select-option>
+        <ion-select-option value="Male">Male</ion-select-option>
+        <ion-select-option value="Female">Female</ion-select-option>
       </ion-select>
     </ion-item>
 

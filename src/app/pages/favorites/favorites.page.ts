@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FavoritesService } from '../../services/crud/favorites.service';
 
 @Component({
   selector: 'app-favorites',
@@ -7,8 +8,16 @@ import { Component } from '@angular/core';
 })
 export class FavoritesPage {
 
-  constructor() { }
+  favoritesList = [];
+
+  constructor(private favoritesService: FavoritesService) { }
 
   ngOnInit() { }
+
+  ionViewWillEnter() { 
+    this.favoritesService.getAllFavorites().get().then((favoritesSnapshot) => {
+      this.favoritesList = favoritesSnapshot.data().peoples;
+    });
+  }
 
 }

@@ -53,6 +53,7 @@ export class HomePage {
 
   // Display details page modal
   async DetailsPeople(people) {
+    this.PeoplesService.setPeople(people); // Retrieve data
     const modal = await this.modalCtrl.create({
       component: DetailsPage,
       componentProps: { people: people }

@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/user/auth.service';
 import { ProfileService } from '../../services/crud/profile.service';
+import { UserService } from '../../services/user/user.service';
 import { LoadingController, AlertController, ToastController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
-import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-profile',
@@ -21,13 +20,12 @@ export class ProfilePage {
   constructor(
     private authService: AuthService,
     private profileService: ProfileService,
+    public userService: UserService,
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     private router: Router,
     private toastController: ToastController,
     private formBuilder: FormBuilder) { 
-    
-    this.user = firebase.auth().currentUser;
 
     this.preferencesGender = this.formBuilder.group({
       gender: [
@@ -39,6 +37,14 @@ export class ProfilePage {
   }
 
   ngOnInit() { }
+
+  // Get user data
+  ionViewWillEnter() {
+    this.userService.getUserProfile().get()
+    .then((userSnapshot) => {
+      this.user = userSnapshot.data();
+    });
+  }
 
   // Log out
   async logoutUser(): Promise<void> {
@@ -114,7 +120,7 @@ export class ProfilePage {
       this.loading = await this.loadingCtrl.create();
 
       const toast = await this.toastController.create({
-        message: 'Your preferences has been saved : ' + preferencesGender.value.gender,
+        message: 'Your preferences has been saved',
         showCloseButton: true,
         position: 'bottom',
         closeButtonText: 'x',
@@ -127,6 +133,7 @@ export class ProfilePage {
       setTimeout(() => {
         this.loading.dismiss();
         this.profileService.preferencesGender(gender);
+        this.user.gender = gender;
         preferencesGender.reset();
         toast.present();
       }, 1000);
@@ -134,5 +141,3 @@ export class ProfilePage {
   }
 
 }
-
-

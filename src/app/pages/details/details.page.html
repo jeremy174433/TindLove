@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{ people.name.first }} {{ people.name.last }}</ion-title>
+    <ion-title>{{ people?.name.first }} {{ people?.name.last }}</ion-title>
     <ion-button slot="end" fill="clear" (click)="dismiss()">
       <ion-icon name="close" slot="icon-only"></ion-icon>
     </ion-button>
@@ -10,39 +10,39 @@
 <ion-content padding>
   
   <ion-card>
-    <ion-item id="item-header" [ngClass]="{'bg-m' : people.gender === 'male', 'bg-f' : people.gender === 'female'}">
+    <ion-item id="item-header" [ngClass]="{'bg-m' : people?.gender === 'male', 'bg-f' : people?.gender === 'female'}">
       <ion-avatar>
-        <ion-img [src]="people.picture.large" alt=""></ion-img>
-        <h1>{{ people.name.first }} {{ people.name.last }}</h1>
+        <ion-img [src]="people?.picture.large" alt=""></ion-img>
+        <h1>{{ people?.name.first }} {{ people?.name.last }}</h1>
       </ion-avatar>      
     </ion-item>
     <ion-card-content>
       <ion-item>
         <ion-icon name="locate" item-left class="ion-margin-end"></ion-icon>
-        <p>{{ people.location.city }}, {{ people.location.state }}</p>
+        <p>{{ people?.location.city }}, {{ people?.location.state }}</p>
       </ion-item>
       <ion-item>
         <ion-icon name="call" item-left class="ion-margin-end"></ion-icon>
-        <p>{{ people.phone }}</p>
+        <p>{{ people?.phone }}</p>
       </ion-item>
       <ion-item>
         <ion-icon name="mail" item-left class="ion-margin-end"></ion-icon>
-        <p>{{ people.email }}</p>
+        <p>{{ people?.email }}</p>
       </ion-item>
       <ion-item>
         <ion-icon name="calendar" item-left class="ion-margin-end"></ion-icon>
-        <p>{{ people.dob.age }} years old</p>
+        <p>{{ people?.dob.age }} years old</p>
       </ion-item>
 
       <!-- Buttons -->
       <ion-row id="button-wrapper">
         <ion-col size="6" class="ion-text-center">
-            <ion-button id="cancel-button" shape="round" color="primary" size="small" (click)="dismiss()"></ion-button>
+            <ion-button id="cancel-button" shape="round" color="primary" size="small" (click)="dismiss()">
               <ion-icon name="close"></ion-icon>
             </ion-button>
         </ion-col>
         <ion-col size="6" class="ion-text-center">
-          <ion-button id="favorites-button" shape="round" color="success" size="small" (click)="addToFavorites()">
+          <ion-button id="favorites-button" shape="round" color="success" size="small" (click)="addToFavorites(people)">
             <ion-icon name="heart-empty"></ion-icon>
             <!--<ion-icon [name]="favorite ? 'heart' : 'heart-empty'"></ion-icon>--->
           </ion-button>
