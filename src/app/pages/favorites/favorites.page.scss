@@ -4,32 +4,75 @@ ion-item {
     --background: transparent;
 }
 
-ion-card {
-    background-color: var(--ion-color-primary);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    cursor: pointer;
+#favorites-list {
 
-    &.bg-m { background-image: url(../../../assets/imgs/background-m.jpg); }
-    &.bg-f { background-image: url(../../../assets/imgs/background-f.jpg); }
+    ion-card {
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
 
-    ion-avatar {
-        width: 100%;
-        height: 75px;
+        &.bg-m { background-image: url(../../../assets/imgs/background-m.jpg); }
+        &.bg-f { background-image: url(../../../assets/imgs/background-f.jpg); }
+
+        ion-card-content {
+            min-width: 100%;
+            text-align: center;
+
+            ion-avatar {
+                margin: 0 auto;
+                margin-bottom: 30px;
+                width: 100px;
+                height: 100px;
     
-        ion-img {
-            margin: 0 auto;
-            width: 75px;
-            height: 75px;
-            background-color: var(--ion-color-light);
-            pointer-events: none;
+                ion-img {
+                    background-color: var(--ion-color-light);
+                    pointer-events: none;
+                }
+            }
+
+            h2 {
+                color: var(--ion-color-light);
+                font-size: 22px;
+                margin-bottom: 10px;
+            }
+
+            p {
+                color: var(--ion-color-light);
+                margin-bottom: 7px;
+            }
+
+        }
+
+        .delete-button {
+            height: 40px;
+            width: 40px;
+            margin-bottom: 15px;
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
         }
     }
-    
-    ion-label h2 { 
-        color: var(--ion-color-light);
+}
+
+// No favorites
+#noData {
+
+    ion-card {
+        align-items: center;
         text-align: center;
-        font-size: 22px;
+        margin: 30px auto;
+        padding: 50px 10%;
+        min-width: max-content;
+
+        @media all and (max-width: 767px) {
+            padding: 30px 10%;
+            min-width: initial; 
+        }
+
+        h1 {
+            margin-top: 0 !important;
+            margin-bottom: 40px;
+            color: var(--ion-color-light-contrast);
+        }
     }
+
 }

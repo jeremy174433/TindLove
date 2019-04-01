@@ -34,7 +34,7 @@ export class HomePage {
     // Skeleton screen
     setTimeout(() => {
       this.data = { };
-    }, 3000);
+    }, 2000);
   }
 
   // Call API

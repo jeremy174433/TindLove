@@ -23,7 +23,7 @@ export class AuthService {
       firebase
       .firestore()
       .doc(`/userProfile/${newUserCredential.user.uid}`)
-      .set({ email: email, gender: 'all' });
+      .set({ email: email, gender: 'All' });
     })
     .catch(error => {
       console.error(error);

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
-import { ToastController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
+
 import { PeoplesService } from '../../services/peoples-service/peoples.service';
 import { FavoritesService } from '../../services/crud/favorites.service';
 

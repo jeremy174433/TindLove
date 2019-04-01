@@ -7,22 +7,47 @@
 <ion-content padding>
 
   <!-- Content -->
-  <ion-grid>
+  <ion-list>
+    <ion-grid *ngIf="data" id="favorites-list">
+      <ion-row>
+        <ion-col size-xs="12" size-md="6" *ngFor="let favorites of favoritesList">
+          <ion-card [ngClass]="{'bg-m' : favorites?.gender === 'male', 'bg-f' : favorites?.gender === 'female'}">
+            <ion-item>
+              <ion-card-content>
+                <ion-avatar>
+                  <ion-img [src]="favorites?.picture.large" alt=""></ion-img>
+                </ion-avatar>
+                <h2>{{ favorites?.name.first }} {{ favorites?.name.last }}</h2>
+                <p>{{ favorites?.email }}</p>
+                <p>{{ favorites?.phone }}</p>
+                <p>{{ favorites?.dob.age }} years old</p>
+              </ion-card-content>
+            </ion-item>
+            <ion-item>
+              <ion-button class="delete-button" shape="round" slot="end" (click)="deletePeople(people)">
+                <ion-icon slot="icon-only" size="small" name="trash"></ion-icon>
+              </ion-button>
+            </ion-item>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+
+  <!-- No favorites -->
+  <ion-grid *ngIf="!data" id="noData">
     <ion-row>
-      <ion-col size-xs="12" size-md="6" size-lg="3" *ngFor="let favorite of favoritesList">
-        <ion-card>
-          <ion-item>
-            <ion-avatar>
-              <ion-img [src]="favorite?.picture.large" alt=""></ion-img>
-            </ion-avatar>
-          </ion-item>
-          <ion-item>
-            <ion-label>
-              <h2>{{ favorite?.name.first }} {{ favorite?.name.last }}</h2>
-            </ion-label>
-          </ion-item>
-        </ion-card>
-      </ion-col>
+      <ion-card>
+        <ion-col size-xs="12">
+          <h1>No favorites profiles for the moment 😪</h1>
+        </ion-col>
+        <ion-col size-xs="12">
+          <ion-button [routerLink]="'/'" routerDirection="forward">
+            <ion-icon size="block" slot="start" name="add-circle"></ion-icon>
+            Add profiles
+          </ion-button>
+        </ion-col>
+      </ion-card>
     </ion-row>
   </ion-grid>
 
