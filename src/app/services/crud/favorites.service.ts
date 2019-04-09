@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { People } from 'src/app/models/peoples';
 
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
@@ -9,38 +10,36 @@ import 'firebase/auth';
 export class FavoritesService {
   
   public currentUser;
-  public userFavoritesPeoples;
   public userFavorites: firebase.firestore.DocumentReference;
-  favoritesList = [];
 
   constructor() {
     firebase.auth().onAuthStateChanged((user: firebase.User) => {
       if (user) {
         this.currentUser = user;
         this.userFavorites = firebase.firestore().doc(`userFavorites/${user.uid}`);
-        
-        firebase.firestore().doc(`userFavorites/${user.uid}`).get()
-        .then((favoriteSnapshot) => {
-          this.userFavoritesPeoples = favoriteSnapshot.get('peoples');
-        });
       }
     });
   }
 
   // Save favorite
-  addNewFavorite(people: string) {
+  addNewFavorite(people: People, peoples: People[]): Promise <any> {
     // First add if not exist
-    if (this.userFavoritesPeoples === undefined) {
-      this.userFavoritesPeoples = [people];
-      this.userFavorites.set({peoples: [people]});
-    }
-    // Next adds
-    else {
-      this.userFavoritesPeoples.push(people);
-      let peoples = this.userFavoritesPeoples;
-      this.userFavorites.update({peoples});
-    }
-    return this.userFavoritesPeoples;
+    return new Promise <any> ((resolve, reject) => {
+      if (peoples === undefined) {
+        peoples = [people];
+        this.userFavorites.set({peoples: peoples})
+        .then(() => { resolve(peoples); })
+        .catch((err) => { reject(err); });
+      }
+      // Next adds
+      else {
+        peoples.push(people);
+        this.userFavorites.update({peoples})
+        .then(() => { resolve(peoples); })
+        .catch((err) => { reject(err); });
+      }
+      resolve(peoples);
+    });
   }
 
   // Get favorites
@@ -48,5 +47,22 @@ export class FavoritesService {
     const userID = firebase.auth().currentUser.uid;
     return firebase.firestore().doc('userFavorites/' + userID);
   }
+
+  // Delete favorite
+  deleteOneFavorite(people: People): Promise <any> {
+    const userID = firebase.auth().currentUser.uid;
+    return new Promise<any>((resolve, reject) => {
+      firebase.firestore().doc('userFavorites/' + userID).get()
+      .then(data => {
+        var peoplesList:{}[] = data.data().peoples;
+        const indexElement = peoplesList.findIndex((p: People) => p.id.value === people.id.value);
+        peoplesList.splice(indexElement, 1)
+        firebase.firestore().doc('userFavorites/' + userID).update({ peoples: peoplesList })
+        .then(() => { resolve(peoplesList) })
+        .catch(err => { reject(err); });
+      })
+      .catch(err => { reject(err); });
+    });
+  } 
 
 }

@@ -43,8 +43,8 @@
         </ion-col>
         <ion-col size="6" class="ion-text-center">
           <ion-button id="favorites-button" shape="round" color="success" size="small" (click)="addToFavorites(people)">
-            <ion-icon name="heart-empty"></ion-icon>
-            <!--<ion-icon [name]="favorite ? 'heart' : 'heart-empty'"></ion-icon>--->
+            <!--<ion-icon name="heart-empty"></ion-icon>-->
+            <ion-icon [name]="isFavorite ? 'heart' : 'heart-empty'"></ion-icon>
           </ion-button>
         </ion-col>
       </ion-row>

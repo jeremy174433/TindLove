@@ -11,20 +11,25 @@ import { FavoritesService } from '../../services/crud/favorites.service';
 })
 export class DetailsPage implements OnInit {
 
-  // favorite: boolean = false;
+  isFavorite: boolean;
   people = [];
+  favoritesList = [];
 
   constructor(
     private modalCtrl: ModalController,
-    private PeoplesService: PeoplesService,
+    private peoplesService: PeoplesService,
     private favoritesService: FavoritesService,
-    private toastController: ToastController) { 
-
-      this.people = this.PeoplesService.getPeople();
-
-  }
+    private toastController: ToastController) { }
 
   ngOnInit() { }
+
+  ionViewWillEnter() {
+    this.people = this.peoplesService.getPeople();
+      this.favoritesService.getAllFavorites().get()
+      .then((favoritesSnapshot) => {
+        this.favoritesList = favoritesSnapshot.data().peoples;
+    })
+  }
 
   // Dismiss details page
   dismiss() { 
@@ -36,8 +41,9 @@ export class DetailsPage implements OnInit {
   async addToFavorites(people) {
     // this.favorite = !this.favorite; // Icon background favorite
     console.log('Favorites button clicked !');
-    this.favoritesService.addNewFavorite(people);
-    this.modalCtrl.dismiss();
+    this.favoritesService.addNewFavorite(people, this.favoritesList);
+    this.isFavorite = true;
+    // this.modalCtrl.dismiss();
 
     const toast = await this.toastController.create({
       message: 'Added to favorites',

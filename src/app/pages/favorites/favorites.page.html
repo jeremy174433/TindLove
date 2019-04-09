@@ -24,7 +24,7 @@
               </ion-card-content>
             </ion-item>
             <ion-item>
-              <ion-button class="delete-button" shape="round" slot="end" (click)="deletePeople(people)">
+              <ion-button class="delete-button" shape="round" slot="end" (click)="deletePeople(favorites)">
                 <ion-icon slot="icon-only" size="small" name="trash"></ion-icon>
               </ion-button>
             </ion-item>
@@ -35,7 +35,7 @@
   </ion-list>
 
   <!-- No favorites -->
-  <ion-grid *ngIf="!data" id="noData">
+  <ion-grid *ngIf="!data || favoritesList.length === 0" id="noData">
     <ion-row>
       <ion-card>
         <ion-col size-xs="12">

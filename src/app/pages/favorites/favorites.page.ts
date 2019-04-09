@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 import { FavoritesService } from '../../services/crud/favorites.service';
 
 import 'firebase/firestore';
-
 
 @Component({
   selector: 'app-favorites',
@@ -13,8 +13,10 @@ export class FavoritesPage {
 
   data: boolean;
   favoritesList = [];
+  peopleList = []
 
   constructor(
+    private alertCtrl: AlertController,
     private favoritesService: FavoritesService) { }
 
   ngOnInit() { }
@@ -22,18 +24,40 @@ export class FavoritesPage {
   // Get favorites list
   ionViewWillEnter() {
     this.data = true;
-    this.favoritesService.getAllFavorites().get().then((favoritesSnapshot) => {
+    this.favoritesService.getAllFavorites().get()
+    .then((favoritesSnapshot) => {
       this.favoritesList = favoritesSnapshot.data().peoples;
       return this.favoritesList.reverse();
     })
-    .catch((err) => {
+    .catch(() => {
       this.data = false;
     });
   }
 
   // Delete people
-  deletePeople(people) {
-    console.log('delete people');
+  async deletePeople(people): Promise<void>  {
+    const alert = await this.alertCtrl.create({
+      message: 'Do you really want to delete this from your favorites list ?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Delete',
+          handler: () => {
+            this.favoritesService.deleteOneFavorite(people)
+            .then((res) => {
+              this.favoritesList = res.reverse();
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
-
+  
 }

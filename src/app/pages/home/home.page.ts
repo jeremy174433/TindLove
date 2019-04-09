@@ -4,6 +4,9 @@ import { ModalController } from '@ionic/angular';
 import { PeoplesService } from '../../services/peoples-service/peoples.service';
 import { DetailsPage } from '../details/details.page';
 
+import * as firebase from 'firebase/app';
+import 'firebase/firestore';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -11,16 +14,18 @@ import { DetailsPage } from '../details/details.page';
 })
 export class HomePage {
 
-  api = this.PeoplesService.getPeoples();
+  api = this.peoplesService.getPeoples();
+  apiByM = this.peoplesService.getByGenderM();
+  apiByF = this.peoplesService.getByGenderF();
   data: any;
   private peoples = [];
+  public lookingFor;
 
   constructor(
-    private PeoplesService: PeoplesService,
+    private peoplesService: PeoplesService,
     private modalCtrl: ModalController) { 
       
       this.DisplayData();
-      
   }
 
   ngOnInit() { }
@@ -39,6 +44,22 @@ export class HomePage {
 
   // Call API
   DisplayData() {
+    const userID = firebase.auth().currentUser.uid;
+    firebase.firestore().doc('userProfile/' + userID).get()
+    .then((lookingForSnapshot) => {
+      this.lookingFor = lookingForSnapshot.get('lookingFor');
+      console.log(this.lookingFor);
+      if(this.lookingFor === 'All') {
+        console.log('all');
+      }
+      else if(this.lookingFor === 'Male') {
+        console.log('male');
+      }
+      else if(this.lookingFor === 'Female') {
+        console.log('female');
+      }
+    });
+
     this.api
     .subscribe(
       (data) => {
@@ -53,7 +74,7 @@ export class HomePage {
 
   // Display details page modal
   async DetailsPeople(people) {
-    this.PeoplesService.setPeople(people); // Retrieve data
+    this.peoplesService.setPeople(people); // Retrieve data
     const modal = await this.modalCtrl.create({
       component: DetailsPage,
       componentProps: { people: people }

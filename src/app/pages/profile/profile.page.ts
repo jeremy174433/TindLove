@@ -127,17 +127,19 @@ export class ProfilePage {
         duration: 3000
       });
   
-      const gender: string = preferencesGender.value.gender;
+      const lookingFor: string = preferencesGender.value.gender;
 
       this.loading.present();
       setTimeout(() => {
         this.loading.dismiss();
-        this.profileService.preferencesGender(gender);
-        this.user.gender = gender;
+        this.profileService.preferencesGender(lookingFor);
+        this.user.lookingFor = lookingFor;
         preferencesGender.reset();
         toast.present();
       }, 1000);
     }
   }
+
+  
 
 }

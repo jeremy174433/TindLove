@@ -12,7 +12,7 @@ export class ProfileService {
   // Save preference Gender
   preferencesGender(gender: string) {
     var userID = firebase.auth().currentUser.uid;
-    return firebase.firestore().doc('userProfile/' + userID).update({ gender: gender });
+    return firebase.firestore().doc('userProfile/' + userID).update({ lookingFor: gender });
   }
   
 }
