@@ -10,10 +10,8 @@ const routes: Routes = [
   { path: 'sign-up', loadChildren: './pages/sign-up/sign-up.module#SignUpPageModule' },
   { path: 'reset-password', loadChildren: './pages/reset-password/reset-password.module#ResetPasswordPageModule' },
   { path: 'privacy-policy', loadChildren: './pages/privacy-policy/privacy-policy.module#PrivacyPolicyPageModule' }
-
-
-
 ];
+
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })

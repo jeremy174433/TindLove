@@ -3,7 +3,7 @@ import { AuthService } from '../../services/user/auth.service';
 import { ProfileService } from '../../services/crud/profile.service';
 import { UserService } from '../../services/user/user.service';
 import { LoadingController, AlertController, ToastController } from '@ionic/angular';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,7 +15,7 @@ export class ProfilePage {
 
   user: any;
   private loading: HTMLIonLoadingElement;
-  preferencesGender: FormGroup;
+  profilePersoUser: FormGroup;
 
   constructor(
     private authService: AuthService,
@@ -27,11 +27,11 @@ export class ProfilePage {
     private toastController: ToastController,
     private formBuilder: FormBuilder) { 
 
-    this.preferencesGender = this.formBuilder.group({
-      gender: [
-        '',
-        Validators.compose([Validators.required])
-      ]
+    this.profilePersoUser = this.formBuilder.group({
+      firstname: [ '' ],
+      lastname: [ '' ],
+      phone: [ '' ],
+      lookingFor: [ '' ]
     });
 
   }
@@ -112,9 +112,9 @@ export class ProfilePage {
   }
 
   // Preferences
-  async savePreferences(preferencesGender: FormGroup) {
-    if (!preferencesGender.valid) {
-      console.log('Need to complete the form, current value: ', preferencesGender.value);
+  async savePreferences(profilePersoUser: FormGroup) {
+    if (!profilePersoUser.valid) {
+      console.log('Need to complete the form, current value: ', profilePersoUser.value);
     }
     else {
       this.loading = await this.loadingCtrl.create();
@@ -126,15 +126,48 @@ export class ProfilePage {
         closeButtonText: 'x',
         duration: 3000
       });
-  
-      const lookingFor: string = preferencesGender.value.gender;
+      
+      let firstname: string;
+      if(profilePersoUser.value.firstname !== '' && profilePersoUser.value.firstname) {
+        firstname = profilePersoUser.value.firstname;
+      }
+      else {
+        firstname = this.user.firstname;
+      }
+
+      let lastname: string;
+      if(profilePersoUser.value.lastname !== '' && profilePersoUser.value.lastname) {
+        lastname = profilePersoUser.value.lastname;
+      }
+      else {
+        lastname = this.user.lastname;
+      }
+
+      let phone: string;
+      if(profilePersoUser.value.phone !== '' && profilePersoUser.value.phone) {
+        phone = profilePersoUser.value.phone;
+      }
+      else {
+        phone = this.user.phone;
+      }
+
+      let lookingFor: string;
+      if(profilePersoUser.value.lookingFor !== '' && profilePersoUser.value.lookingFor) {
+        lookingFor = profilePersoUser.value.lookingFor;
+      }
+      else {
+        lookingFor = this.user.lookingFor;
+      }
 
       this.loading.present();
       setTimeout(() => {
         this.loading.dismiss();
-        this.profileService.preferencesGender(lookingFor);
+        this.profileService.updateProfile(firstname, lastname, phone, lookingFor);
+        this.user.firstname = firstname;
+        this.user.lastname = lastname;
+        this.user.phone = phone;
         this.user.lookingFor = lookingFor;
-        preferencesGender.reset();
+        profilePersoUser.reset();
         toast.present();
       }, 1000);
     }

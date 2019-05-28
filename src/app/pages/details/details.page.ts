@@ -37,10 +37,8 @@ export class DetailsPage implements OnInit {
   }
 
   // Adding person to the favorites page
-  // addToFavorites():void
   async addToFavorites(people) {
     // this.favorite = !this.favorite; // Icon background favorite
-    console.log('Favorites button clicked !');
     this.favoritesService.addNewFavorite(people, this.favoritesList);
     this.isFavorite = true;
     // this.modalCtrl.dismiss();

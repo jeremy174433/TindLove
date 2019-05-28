@@ -1,0 +1,31 @@
+// Native style
+ion-item { 
+    --highlight-color-invalid: var(--ion-color-primary);
+    --highlight-color-valid: var(--ion-color-success-shade);
+    --padding-start: 0; // Label at start
+}
+
+#wrapper {
+    margin: 0 auto;
+
+    @media (min-width: 992px) { max-width: 750px; }
+    @media (max-width: 991px) { 
+        max-width: 500px; 
+        padding: 0 20px;
+    }
+
+    #table-profile-infos {
+        
+        ion-col { 
+            border-top: 1px solid #ccc;
+            padding: 10px;
+
+            &.first-col { 
+                border-right: 1px solid #ccc;
+                border-left: 1px solid #ccc;
+            }
+            &.last-col { border-bottom: 1px solid #ccc; }
+            &.right-col { border-right: 1px solid #ccc; }
+        }
+    }
+}

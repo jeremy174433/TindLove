@@ -6,6 +6,12 @@
 
 <ion-content padding>
 
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="deleteAllPeoples(favorites)">
+    <ion-fab-button>
+      <ion-icon name="trash"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
   <!-- Content -->
   <ion-list>
     <ion-grid *ngIf="data" id="favorites-list">
@@ -25,7 +31,7 @@
             </ion-item>
             <ion-item>
               <ion-button class="delete-button" shape="round" slot="end" (click)="deletePeople(favorites)">
-                <ion-icon slot="icon-only" size="small" name="trash"></ion-icon>
+                <ion-icon slot="icon-only" size="small" name="close"></ion-icon>
               </ion-button>
             </ion-item>
           </ion-card>

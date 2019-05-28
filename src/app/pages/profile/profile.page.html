@@ -6,41 +6,120 @@
 
 <ion-content padding>
 
-  <h1>Profile Page</h1>
+  <div id="wrapper">
 
-  <p>Email : <ion-label color="primary">{{ user?.email }}</ion-label></p>
-  <p>Looking for : <ion-label color="primary">{{ user?.lookingFor }}</ion-label></p>
+    <h1>Profile Page</h1>
 
-  <div>
-    <ion-button (click)="logoutUser()">
-      <ion-icon slot="start" name="log-out"></ion-icon>
-      Log out
-    </ion-button>
+    <!-- Table infos -->
+    <ion-grid id="table-profile-infos">
+      <ion-row>
+
+        <ion-col size="6" size-md="4" class="first-col">
+          <span>Email :</span>
+        </ion-col>
+        <ion-col size="6" size-md="8" class="right-col">
+          <ion-label color="primary">{{ user?.email }}</ion-label>
+        </ion-col>
+
+        <ion-col size="6" size-md="4" class="first-col">
+          <span>Firstname :</span>
+        </ion-col>
+        <ion-col size="6" size-md="8" class="right-col">
+          <ion-label color="primary">{{ user?.firstname }}</ion-label>
+        </ion-col>
+
+        <ion-col size="6" size-md="4" class="first-col">
+          <span>Lastname :</span>
+        </ion-col>
+        <ion-col size="6" size-md="8" class="right-col">
+          <ion-label color="primary">{{ user?.lastname }}</ion-label>
+        </ion-col>
+
+        <ion-col size="6" size-md="4" class="first-col">
+          <span>Phone number :</span>
+        </ion-col>
+        <ion-col size="6" size-md="8" class="right-col">
+          <ion-label color="primary">{{ user?.phone }}</ion-label>
+        </ion-col>
+
+        <ion-col size="6" size-md="4" class="last-col first-col">
+          <span>Looking for :</span>
+        </ion-col>
+        <ion-col size="6" size-md="8" class="last-col right-col">
+          <ion-label color="primary">{{ user?.lookingFor }}</ion-label>
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+
+    <div class="ion-margin-top ion-text-end">
+      <ion-button (click)="logoutUser()">
+        <ion-icon slot="start" name="log-out"></ion-icon>
+        Log out
+      </ion-button>
+
+      <ion-button (click)="deleteAccount()">
+        <ion-icon slot="start" name="remove-circle"></ion-icon>
+        Delete account
+      </ion-button>
+
+      <ion-button routerLink="/privacy-policy">
+        <ion-icon slot="start" name="clipboard"></ion-icon>
+        Privacy Policy
+      </ion-button>
+    </div>
+
+    <!-- Preferences -->
+    <form [formGroup]="profilePersoUser">
+
+      <h2>Preferences :</h2>
+
+      <ion-item>
+        <ion-label position="floating" color="primary">
+          <ion-icon name="person" class="ion-margin-end"></ion-icon>
+          Firstname
+        </ion-label>
+        <ion-input
+          formControlName="firstname"
+          type="text">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating" color="primary">
+          <ion-icon name="person" class="ion-margin-end"></ion-icon>
+          Lastname
+        </ion-label>
+        <ion-input
+          formControlName="lastname"
+          type="text">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating" color="primary">
+          <ion-icon name="call" class="ion-margin-end"></ion-icon>
+          Phone number
+        </ion-label>
+        <ion-input
+          formControlName="phone"
+          type="number">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating" color="primary">Looking for</ion-label>
+        <ion-select formControlName="lookingFor">
+          <ion-select-option value="All">All</ion-select-option>
+          <ion-select-option value="Male">Male</ion-select-option>
+          <ion-select-option value="Female">Female</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-button expand="block" (click)="savePreferences(profilePersoUser)" class="ion-margin-top">Save preferences</ion-button>
+
+    </form>
+
   </div>
-
-  <div>
-    <ion-button (click)="deleteAccount()">
-      <ion-icon slot="start" name="remove-circle"></ion-icon>
-      Delete account
-    </ion-button>
-  </div>
-
-  <!-- Preferences -->
-  <form [formGroup]="preferencesGender">
-
-    <h2>Preferences :</h2>
-
-    <ion-item>
-      <ion-label>Gender</ion-label>
-      <ion-select formControlName="gender">
-        <ion-select-option value="All">All</ion-select-option>
-        <ion-select-option value="Male">Male</ion-select-option>
-        <ion-select-option value="Female">Female</ion-select-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-button expand="block" (click)="savePreferences(preferencesGender)" [disabled]="!preferencesGender.valid">Save preferences</ion-button>
-
-  </form>
 
 </ion-content>

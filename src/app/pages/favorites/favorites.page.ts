@@ -59,5 +59,10 @@ export class FavoritesPage {
     });
     await alert.present();
   }
+
+  // Delete all peoples
+  deleteAllPeoples() {
+    console.log('all peoples');
+  }
   
 }

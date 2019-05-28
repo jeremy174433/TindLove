@@ -10,9 +10,14 @@ export class ProfileService {
   constructor() { }
 
   // Save preference Gender
-  preferencesGender(gender: string) {
+  updateProfile(firstname: string, lastname: string, phone: string, lookingFor: string) {
     var userID = firebase.auth().currentUser.uid;
-    return firebase.firestore().doc('userProfile/' + userID).update({ lookingFor: gender });
+    return firebase.firestore().doc('userProfile/' + userID).update({ 
+      firstname: firstname, 
+      lastname: lastname, 
+      phone: phone, 
+      lookingFor: lookingFor
+    });
   }
   
 }
