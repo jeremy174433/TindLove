@@ -20,7 +20,10 @@ export class AuthService {
   signupUser(email: string, password: string): Promise<any> {
     return firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((newUserCredential: firebase.auth.UserCredential) => {
-      firebase.firestore().doc(`/userProfile/${newUserCredential.user.uid}`).set({ email: email, lookingFor: 'All' });
+      firebase.firestore().doc(`/userProfile/${newUserCredential.user.uid}`).set({ 
+        email: email,
+        lookingForGender: 'All' 
+      });
       firebase.firestore().doc(`/userFavorites/${newUserCredential.user.uid}`).set({ peoples: [] });
     })
     .catch(error => {

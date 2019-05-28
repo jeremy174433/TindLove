@@ -22,7 +22,7 @@
     <ion-grid>
       <ion-row>
         <ion-col size-xs="12" size-md="6" size-lg="3" *ngFor="let people of peoples">
-          <ion-card (click)="DetailsPeople(people)" [ngClass]="{'bg-m' : people?.gender === 'male', 'bg-f' : people?.gender === 'female'}">
+          <ion-card (click)="detailsPeople(people)" [ngClass]="{'bg-m' : people?.gender === 'male', 'bg-f' : people?.gender === 'female'}">
             <ion-item>
               <ion-avatar>
                 <ion-img [src]="people?.picture.large" alt=""></ion-img>

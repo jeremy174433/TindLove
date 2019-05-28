@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 import { PeoplesService } from '../../services/peoples-service/peoples.service';
+import { HomepageService } from '../../services/crud/homepage.service';
 import { DetailsPage } from '../details/details.page';
 
 import * as firebase from 'firebase/app';
@@ -19,13 +20,15 @@ export class HomePage {
   apiByF = this.peoplesService.getByGenderF();
   data: any;
   private peoples = [];
-  public lookingFor;
+  public lookingForGender;
 
   constructor(
     private peoplesService: PeoplesService,
+    private homepageService: HomepageService,
     private modalCtrl: ModalController) { 
       
-      this.DisplayData();
+      this.displayData();
+      this.displayUsers();
   }
 
   ngOnInit() { }
@@ -38,24 +41,24 @@ export class HomePage {
   ionViewWillEnter() {
     // Skeleton screen
     setTimeout(() => {
-      this.data = { };
+      this.data = {};
     }, 2000);
   }
 
   // Call API
-  DisplayData() {
+  displayData() {
     const userID = firebase.auth().currentUser.uid;
     firebase.firestore().doc('userProfile/' + userID).get()
-    .then((lookingForSnapshot) => {
-      this.lookingFor = lookingForSnapshot.get('lookingFor');
-      console.log(this.lookingFor);
-      if(this.lookingFor === 'All') {
+    .then((lookingForGenderSnapshot) => {
+      this.lookingForGender = lookingForGenderSnapshot.get('lookingForGender');
+      console.log(this.lookingForGender);
+      if(this.lookingForGender === 'All') {
         console.log('all');
       }
-      else if(this.lookingFor === 'Male') {
+      else if(this.lookingForGender === 'Male') {
         console.log('male');
       }
-      else if(this.lookingFor === 'Female') {
+      else if(this.lookingForGender === 'Female') {
         console.log('female');
       }
     });
@@ -72,8 +75,14 @@ export class HomePage {
     ).unsubscribe;
   }
 
+  // Display userProfile
+  displayUsers() {
+    console.log('display users data');
+    this.homepageService.getUsersData();
+  }
+
   // Display details page modal
-  async DetailsPeople(people) {
+  async detailsPeople(people) {
     this.peoplesService.setPeople(people); // Retrieve data
     const modal = await this.modalCtrl.create({
       component: DetailsPage,
@@ -85,7 +94,7 @@ export class HomePage {
   // Pull to refresh
   doRefresh(event) {
     setTimeout(() => {
-      this.DisplayData();
+      this.displayData();
       event.target.complete();
     }, 500);
   }

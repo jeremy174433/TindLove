@@ -8,50 +8,58 @@
 
   <div id="wrapper">
 
-    <h1>Profile Page</h1>
+    <h1>My personal informations</h1>
 
     <!-- Table infos -->
     <ion-grid id="table-profile-infos">
       <ion-row>
 
         <ion-col size="6" size-md="4" class="first-col">
-          <span>Email :</span>
+          <span>Email</span>
         </ion-col>
         <ion-col size="6" size-md="8" class="right-col">
           <ion-label color="primary">{{ user?.email }}</ion-label>
         </ion-col>
 
         <ion-col size="6" size-md="4" class="first-col">
-          <span>Firstname :</span>
+          <span>Firstname</span>
         </ion-col>
         <ion-col size="6" size-md="8" class="right-col">
           <ion-label color="primary">{{ user?.firstname }}</ion-label>
         </ion-col>
 
         <ion-col size="6" size-md="4" class="first-col">
-          <span>Lastname :</span>
+          <span>Lastname</span>
         </ion-col>
         <ion-col size="6" size-md="8" class="right-col">
           <ion-label color="primary">{{ user?.lastname }}</ion-label>
         </ion-col>
 
         <ion-col size="6" size-md="4" class="first-col">
-          <span>Phone number :</span>
+          <span>Age</span>
+        </ion-col>
+        <ion-col size="6" size-md="8" class="right-col">
+          <ion-label color="primary">{{ user?.age }}</ion-label>
+        </ion-col>
+
+        <ion-col size="6" size-md="4" class="first-col">
+          <span>Phone number</span>
         </ion-col>
         <ion-col size="6" size-md="8" class="right-col">
           <ion-label color="primary">{{ user?.phone }}</ion-label>
         </ion-col>
 
         <ion-col size="6" size-md="4" class="last-col first-col">
-          <span>Looking for :</span>
+          <span>Looking for gender</span>
         </ion-col>
         <ion-col size="6" size-md="8" class="last-col right-col">
-          <ion-label color="primary">{{ user?.lookingFor }}</ion-label>
+          <ion-label color="primary">{{ user?.lookingForGender }}</ion-label>
         </ion-col>
 
       </ion-row>
     </ion-grid>
 
+    <!-- Buttons -->
     <div class="ion-margin-top ion-text-end">
       <ion-button (click)="logoutUser()">
         <ion-icon slot="start" name="log-out"></ion-icon>
@@ -69,20 +77,17 @@
       </ion-button>
     </div>
 
-    <!-- Preferences -->
+    <!-- Profile Form -->
     <form [formGroup]="profilePersoUser">
 
-      <h2>Preferences :</h2>
+      <h2>My profile :</h2>
 
       <ion-item>
         <ion-label position="floating" color="primary">
           <ion-icon name="person" class="ion-margin-end"></ion-icon>
           Firstname
         </ion-label>
-        <ion-input
-          formControlName="firstname"
-          type="text">
-        </ion-input>
+        <ion-input formControlName="firstname" type="text" value="{{ user?.firstname }}"></ion-input>
       </ion-item>
 
       <ion-item>
@@ -90,10 +95,15 @@
           <ion-icon name="person" class="ion-margin-end"></ion-icon>
           Lastname
         </ion-label>
-        <ion-input
-          formControlName="lastname"
-          type="text">
-        </ion-input>
+        <ion-input formControlName="lastname" type="text" value="{{ user?.lastname }}"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating" color="primary">
+          <ion-icon name="gift" class="ion-margin-end"></ion-icon>
+          Age
+        </ion-label>
+        <ion-input formControlName="age" type="number" value="{{ user?.age }}"></ion-input>
       </ion-item>
 
       <ion-item>
@@ -101,22 +111,21 @@
           <ion-icon name="call" class="ion-margin-end"></ion-icon>
           Phone number
         </ion-label>
-        <ion-input
-          formControlName="phone"
-          type="number">
-        </ion-input>
+        <ion-input formControlName="phone" type="number" value="{{ user?.phone }}"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating" color="primary">Looking for</ion-label>
-        <ion-select formControlName="lookingFor">
+        <ion-label position="floating" color="primary">Looking for gender</ion-label>
+        <ion-select formControlName="lookingForGender" value="{{ user?.lookingForGender }}">
           <ion-select-option value="All">All</ion-select-option>
           <ion-select-option value="Male">Male</ion-select-option>
           <ion-select-option value="Female">Female</ion-select-option>
         </ion-select>
       </ion-item>
 
-      <ion-button expand="block" (click)="savePreferences(profilePersoUser)" class="ion-margin-top">Save preferences</ion-button>
+      <div class="ion-text-end">
+        <ion-button (click)="savePreferences(profilePersoUser)" class="ion-margin-top">Save preferences</ion-button>
+      </div>
 
     </form>
 

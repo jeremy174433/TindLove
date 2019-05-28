@@ -30,8 +30,9 @@ export class ProfilePage {
     this.profilePersoUser = this.formBuilder.group({
       firstname: [ '' ],
       lastname: [ '' ],
+      age: [ '' ],
       phone: [ '' ],
-      lookingFor: [ '' ]
+      lookingForGender: [ '' ]
     });
 
   }
@@ -111,7 +112,7 @@ export class ProfilePage {
     await alert.present();
   }
 
-  // Preferences
+  // Profile informations
   async savePreferences(profilePersoUser: FormGroup) {
     if (!profilePersoUser.valid) {
       console.log('Need to complete the form, current value: ', profilePersoUser.value);
@@ -143,6 +144,14 @@ export class ProfilePage {
         lastname = this.user.lastname;
       }
 
+      let age: string;
+      if(profilePersoUser.value.age !== '' && profilePersoUser.value.age) {
+        age = profilePersoUser.value.age;
+      }
+      else {
+        age = this.user.age;
+      }
+
       let phone: string;
       if(profilePersoUser.value.phone !== '' && profilePersoUser.value.phone) {
         phone = profilePersoUser.value.phone;
@@ -151,28 +160,26 @@ export class ProfilePage {
         phone = this.user.phone;
       }
 
-      let lookingFor: string;
-      if(profilePersoUser.value.lookingFor !== '' && profilePersoUser.value.lookingFor) {
-        lookingFor = profilePersoUser.value.lookingFor;
+      let lookingForGender: string;
+      if(profilePersoUser.value.lookingForGender !== '' && profilePersoUser.value.lookingForGender) {
+        lookingForGender = profilePersoUser.value.lookingForGender;
       }
       else {
-        lookingFor = this.user.lookingFor;
+        lookingForGender = this.user.lookingForGender;
       }
 
       this.loading.present();
       setTimeout(() => {
         this.loading.dismiss();
-        this.profileService.updateProfile(firstname, lastname, phone, lookingFor);
+        this.profileService.updateProfile(firstname, lastname, age, phone, lookingForGender);
         this.user.firstname = firstname;
         this.user.lastname = lastname;
+        this.user.age = age;
         this.user.phone = phone;
-        this.user.lookingFor = lookingFor;
-        profilePersoUser.reset();
+        this.user.lookingForGender = lookingForGender;
         toast.present();
       }, 1000);
     }
   }
-
-  
 
 }
