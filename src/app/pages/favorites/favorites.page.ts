@@ -61,8 +61,31 @@ export class FavoritesPage {
   }
 
   // Delete all peoples
-  deleteAllPeoples() {
-    console.log('all peoples');
+  async deleteAllPeoples(): Promise<void> {
+
+    const alert = await this.alertCtrl.create({
+      header: 'WARNING 💣',
+      message: 'Do you really want to delete all the favorites from your list ?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            this.favoritesService.deleteAll()
+            .then((res) => {
+              this.favoritesList = res;
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
   
 }

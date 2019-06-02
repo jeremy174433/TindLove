@@ -65,4 +65,25 @@ export class FavoritesService {
     });
   } 
 
+  // Delete all favorites
+  deleteAll(): Promise <any> {
+    const userID = firebase.auth().currentUser.uid;
+    const favoritesListRef = firebase.firestore().doc('userFavorites/' + userID);
+    
+    return new Promise<any>((resolve, reject) => {
+      favoritesListRef.get()
+      .then(data => {
+        var peoplesList:{}[] = data.data().peoples;
+        peoplesList = []
+        favoritesListRef.update({
+          peoples: firebase.firestore.FieldValue.delete()
+        }),
+        favoritesListRef.update({ peoples: [] })
+        .then(() => { resolve(peoplesList) })
+        .catch(err => { reject(err); });
+      })
+      .catch(err => { reject(err); });
+    });
+  }
+
 }

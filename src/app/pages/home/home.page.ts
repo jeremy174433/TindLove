@@ -19,6 +19,7 @@ export class HomePage {
   apiByM = this.peoplesService.getByGenderM();
   apiByF = this.peoplesService.getByGenderF();
   data: any;
+  usersList = [];
   private peoples = [];
   public lookingForGender;
 
@@ -28,10 +29,11 @@ export class HomePage {
     private modalCtrl: ModalController) { 
       
       this.displayData();
-      this.displayUsers();
   }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this.displayUsers();
+  }
 
   // Disable back button on tabs page to not return on sign-in page after user authentification
   ionViewCanLeave() {
@@ -42,11 +44,12 @@ export class HomePage {
     // Skeleton screen
     setTimeout(() => {
       this.data = {};
-    }, 2000);
+    }, 500);
   }
 
   // Call API
   displayData() {
+    /*
     const userID = firebase.auth().currentUser.uid;
     firebase.firestore().doc('userProfile/' + userID).get()
     .then((lookingForGenderSnapshot) => {
@@ -62,6 +65,7 @@ export class HomePage {
         console.log('female');
       }
     });
+    */
 
     this.api
     .subscribe(
@@ -75,10 +79,16 @@ export class HomePage {
     ).unsubscribe;
   }
 
-  // Display userProfile
+  // Display usersProfile
   displayUsers() {
-    console.log('display users data');
-    this.homepageService.getUsersData();
+    this.homepageService.getUsersData().get()
+    .then((usersSnapshot) => {
+      this.usersList = usersSnapshot.data().peoples;
+      return this.usersList;
+    })
+    .catch(() => {
+      console.log('Occured error on displayUsers function');
+    });
   }
 
   // Display details page modal
@@ -89,6 +99,11 @@ export class HomePage {
       componentProps: { people: people }
     });
     return await modal.present();
+  }
+
+  // Display details page modal
+  async detailsRealPeople() {
+    console.log('Details real user');
   }
 
   // Pull to refresh

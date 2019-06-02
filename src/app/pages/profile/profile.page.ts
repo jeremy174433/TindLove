@@ -113,7 +113,7 @@ export class ProfilePage {
   }
 
   // Profile informations
-  async savePreferences(profilePersoUser: FormGroup) {
+  async saveProfile(profilePersoUser: FormGroup) {
     if (!profilePersoUser.valid) {
       console.log('Need to complete the form, current value: ', profilePersoUser.value);
     }
@@ -121,7 +121,7 @@ export class ProfilePage {
       this.loading = await this.loadingCtrl.create();
 
       const toast = await this.toastController.create({
-        message: 'Your preferences has been saved',
+        message: 'Your modifications has been saved',
         showCloseButton: true,
         position: 'bottom',
         closeButtonText: 'x',

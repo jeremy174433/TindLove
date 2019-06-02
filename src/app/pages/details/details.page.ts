@@ -41,14 +41,14 @@ export class DetailsPage implements OnInit {
     // this.favorite = !this.favorite; // Icon background favorite
     this.favoritesService.addNewFavorite(people, this.favoritesList);
     this.isFavorite = true;
-    // this.modalCtrl.dismiss();
+    this.modalCtrl.dismiss();
 
     const toast = await this.toastController.create({
       message: 'Added to favorites',
       showCloseButton: true,
       position: 'bottom',
       closeButtonText: 'x',
-      duration: 2000
+      duration: 600
     });
     toast.present();
   }

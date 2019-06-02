@@ -29,4 +29,5 @@ export class AppComponent {
     });
     firebase.initializeApp(firebaseConfig);
   }
+
 }
