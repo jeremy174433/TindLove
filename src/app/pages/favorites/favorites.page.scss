@@ -15,6 +15,14 @@ ion-item {
         &.bg-f { background-image: url(../../../assets/imgs/background-f.jpg); }
         &.bg-g { background-image: url(../../../assets/imgs/background-g.jpg); }
 
+        ion-icon[name="star"] {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            color: var(--ion-color-light);
+            font-size: 18px;
+        }
+
         ion-card-content {
             min-width: 100%;
             text-align: center;

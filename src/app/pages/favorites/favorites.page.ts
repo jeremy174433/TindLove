@@ -14,7 +14,6 @@ export class FavoritesPage {
   data: boolean;
   favoritesList = [];
   favoritesListRealUsers = [];
-  peopleList = []
 
   constructor(
     private alertCtrl: AlertController,
@@ -69,6 +68,31 @@ export class FavoritesPage {
     await alert.present();
   }
 
+  async deleteUser(user): Promise<void> {
+    const alert = await this.alertCtrl.create({
+      message: 'Do you really want to delete this from your favorites list ?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Delete',
+          handler: () => {
+            this.favoritesService.deleteOneRealFavorite(user)
+            .then((res) => {
+              this.favoritesListRealUsers = res.reverse();
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
   // Delete all peoples
   async deleteAllPeoples(): Promise<void> {
 
@@ -86,6 +110,7 @@ export class FavoritesPage {
             this.favoritesService.deleteAll()
             .then((res) => {
               this.favoritesList = res;
+              this.favoritesListRealUsers = res;
             })
             .catch((err) => {
               console.log(err);

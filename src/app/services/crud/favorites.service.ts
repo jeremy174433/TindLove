@@ -3,6 +3,7 @@ import { People } from 'src/app/models/peoples';
 import { User } from 'src/app/models/users';
 
 import * as firebase from 'firebase/app';
+import 'firebase/firestore';  
 import 'firebase/auth';
 
 @Injectable({
@@ -21,6 +22,46 @@ export class FavoritesService {
       }
     });
   }
+
+  // Get favorites
+  getAllFavorites(): firebase.firestore.DocumentReference {
+    const userID = firebase.auth().currentUser.uid;
+    return firebase.firestore().doc('userFavorites/' + userID);
+  }
+  
+  // Delete all favorites
+  deleteAll(): Promise <any> {
+    const userID = firebase.auth().currentUser.uid;
+    const favoritesListRef = firebase.firestore().doc('userFavorites/' + userID);
+    
+    return new Promise<any>((resolve, reject) => {
+      favoritesListRef.get()
+      .then(data => {
+        var peoplesList:{}[] = data.data().peoples;
+        peoplesList = [];
+        var usersList:{}[] = data.data().users;
+        usersList = [];
+        favoritesListRef.update({
+          peoples: firebase.firestore.FieldValue.delete(),
+          users: firebase.firestore.FieldValue.delete()
+        }),
+        favoritesListRef.update({ 
+          peoples: [],
+          users: []
+        })
+        .then(() => {
+          resolve(peoplesList);
+          resolve(usersList);
+        })
+        .catch(err => { reject(err); });
+      })
+      .catch(err => { reject(err); });
+    });
+  }
+
+  /****************************
+  CRUD API USERS :
+  ****************************/
 
   // Save favorite API users
   addNewFavorite(people: People, peoples: People[]): Promise <any> {
@@ -43,33 +84,6 @@ export class FavoritesService {
     });
   }
 
-  // Save favorite real users
-  addNewRealFavorite(user: User, users: User[]): Promise <any> {
-    // First add if not exist
-    return new Promise <any> ((resolve, reject) => {
-      if (users === undefined) {
-        users = [user];
-        this.userFavorites.set({peoples: users})
-        .then(() => { resolve(users); })
-        .catch((err) => { reject(err); });
-      }
-      // Next adds
-      else {
-        users.push(user);
-        this.userFavorites.update({users})
-        .then(() => { resolve(users); })
-        .catch((err) => { reject(err); });
-      }
-      resolve(users);
-    });
-  }
-
-  // Get favorites
-  getAllFavorites(): firebase.firestore.DocumentReference {
-    const userID = firebase.auth().currentUser.uid;
-    return firebase.firestore().doc('userFavorites/' + userID);
-  }
-
   // Delete favorite
   deleteOneFavorite(people: People): Promise <any> {
     const userID = firebase.auth().currentUser.uid;
@@ -87,25 +101,36 @@ export class FavoritesService {
     });
   } 
 
-  // Delete all favorites
-  deleteAll(): Promise <any> {
-    const userID = firebase.auth().currentUser.uid;
-    const favoritesListRef = firebase.firestore().doc('userFavorites/' + userID);
-    
-    return new Promise<any>((resolve, reject) => {
-      favoritesListRef.get()
-      .then(data => {
-        var peoplesList:{}[] = data.data().peoples;
-        peoplesList = []
-        favoritesListRef.update({
-          peoples: firebase.firestore.FieldValue.delete()
-        }),
-        favoritesListRef.update({ peoples: [] })
-        .then(() => { resolve(peoplesList) })
-        .catch(err => { reject(err); });
-      })
-      .catch(err => { reject(err); });
+  /****************************
+  CRUD DATABASE USERS :
+  ****************************/
+
+  // Save favorite real users
+  addNewRealFavorite(user: User, users: User[]): Promise <any> {
+    // First add if not exist
+    return new Promise <any> ((resolve, reject) => {
+      if (users === undefined) {
+        users = [user];
+        this.userFavorites.set({users: users})
+        .then(() => { resolve(users); })
+        .catch((err) => { reject(err); });
+      }
+      // Next adds
+      else {
+        users.push(user);
+        this.userFavorites.update({users})
+        .then(() => { resolve(users); })
+        .catch((err) => { reject(err); });
+      }
+      resolve(users);
     });
   }
+
+  // Delete favorite
+  deleteOneRealFavorite(user: User): Promise <any> {
+    return new Promise<any>((resolve, reject) => {
+      console.log('Delete a specific favorite item');
+    });
+  } 
 
 }

@@ -11,7 +11,7 @@ export class HomepageService {
 
   // Retrieve users from database
   getUsersData(): firebase.firestore.CollectionReference {
-    return firebase.firestore().collection('userProfile/');
+    return firebase.firestore().collection('userProfile');
   }
 
 }

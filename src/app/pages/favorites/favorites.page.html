@@ -6,7 +6,8 @@
 
 <ion-content padding>
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="deleteAllPeoples(favorites)">
+  <!-- Button Delete All Favorites -->
+  <ion-fab *ngIf="favoritesList.length >= 1 || favoritesListRealUsers.length >= 1" vertical="bottom" horizontal="end" slot="fixed" (click)="deleteAllPeoples(favorites)">
     <ion-fab-button>
       <ion-icon name="trash"></ion-icon>
     </ion-fab-button>
@@ -19,6 +20,7 @@
         <!-- Favorites List Real Users -->
         <ion-col size-xs="12" size-md="6" *ngFor="let favoritesUser of favoritesListRealUsers">
           <ion-card class="bg-g">
+            <ion-icon name="star"></ion-icon>
             <ion-item>
               <ion-card-content>
                 <ion-avatar>
@@ -31,7 +33,7 @@
               </ion-card-content>
             </ion-item>
             <ion-item>
-              <ion-button class="delete-button" shape="round" slot="end">
+              <ion-button class="delete-button" shape="round" slot="end" (click)="deleteUser(user)">
                 <ion-icon slot="icon-only" size="small" name="close"></ion-icon>
               </ion-button>
             </ion-item>
@@ -67,7 +69,7 @@
     <ion-row>
       <ion-card>
         <ion-col size-xs="12">
-          <h1>No favorites profiles for the moment 😪</h1>
+          <h1>No favorites profiles yet 😪</h1>
         </ion-col>
         <ion-col size-xs="12">
           <ion-button [routerLink]="'/'" routerDirection="forward">

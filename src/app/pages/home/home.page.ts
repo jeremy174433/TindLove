@@ -4,10 +4,10 @@ import { ModalController } from '@ionic/angular';
 import { PeoplesService } from '../../services/peoples-service/peoples.service';
 import { HomepageService } from '../../services/crud/homepage.service';
 import { DetailsPage } from '../details/details.page';
+import { DetailsUsersPage } from '../details-users/details-users.page';
 
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
-import { DetailsUsersPage } from '../details-users/details-users.page';
 
 @Component({
   selector: 'app-home',
@@ -84,7 +84,6 @@ export class HomePage {
   displayUsers() {
     this.homepageService.getUsersData().get()
     .then((usersSnapshot) => {
-      // console.log(usersSnapshot)
       const docLists = usersSnapshot.docs;
       const userID = firebase.auth().currentUser.uid;
       this.usersList = []; // Reset the list before push elements
@@ -99,8 +98,8 @@ export class HomePage {
       })
       return this.usersList;
     })
-    .catch(() => {
-      console.log('Occured error on displayUsers function');
+    .catch((err) => {
+      console.log('Occured error => ', err);
     });
   }
 

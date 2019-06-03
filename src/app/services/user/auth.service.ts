@@ -22,6 +22,7 @@ export class AuthService {
     .then((newUserCredential: firebase.auth.UserCredential) => {
       firebase.firestore().doc(`/userProfile/${newUserCredential.user.uid}`).set({ 
         email: email,
+        id: newUserCredential.user.uid,
         lookingForGender: 'All' 
       });
       firebase.firestore().doc(`/userFavorites/${newUserCredential.user.uid}`).set({ 
