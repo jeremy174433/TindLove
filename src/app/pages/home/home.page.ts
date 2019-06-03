@@ -31,9 +31,7 @@ export class HomePage {
       this.displayData();
   }
 
-  ngOnInit() { 
-    this.displayUsers();
-  }
+  ngOnInit() { }
 
   // Disable back button on tabs page to not return on sign-in page after user authentification
   ionViewCanLeave() {
@@ -41,6 +39,7 @@ export class HomePage {
   }
 
   ionViewWillEnter() {
+    this.displayUsers();
     // Skeleton screen
     setTimeout(() => {
       this.data = {};
@@ -83,7 +82,19 @@ export class HomePage {
   displayUsers() {
     this.homepageService.getUsersData().get()
     .then((usersSnapshot) => {
-      this.usersList = usersSnapshot.data().peoples;
+      // console.log(usersSnapshot)
+      const docLists = usersSnapshot.docs;
+      const userID = firebase.auth().currentUser.uid;
+      this.usersList = []; // Reset the list before push elements
+      docLists.forEach((doc: any, index) => {
+        // Push users list
+        this.usersList.push(doc._document.proto.fields);
+
+        // Splice current user
+        if(userID === doc.id) {
+          this.usersList.splice(index, 1);
+        }
+      })
       return this.usersList;
     })
     .catch(() => {

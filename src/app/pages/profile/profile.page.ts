@@ -3,7 +3,7 @@ import { AuthService } from '../../services/user/auth.service';
 import { ProfileService } from '../../services/crud/profile.service';
 import { UserService } from '../../services/user/user.service';
 import { LoadingController, AlertController, ToastController } from '@ionic/angular';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -28,11 +28,11 @@ export class ProfilePage {
     private formBuilder: FormBuilder) { 
 
     this.profilePersoUser = this.formBuilder.group({
-      firstname: [ '' ],
-      lastname: [ '' ],
-      age: [ '' ],
-      phone: [ '' ],
-      lookingForGender: [ '' ]
+      firstname: [ '', Validators.compose([Validators.required]) ],
+      lastname: [ '', Validators.compose([Validators.required]) ],
+      age: [ '', Validators.compose([Validators.required]) ],
+      phone: [ '', Validators.compose([Validators.required]) ],
+      lookingForGender: [ '', Validators.compose([Validators.required]) ]
     });
 
   }
@@ -128,6 +128,7 @@ export class ProfilePage {
         duration: 3000
       });
       
+      // firstname
       let firstname: string;
       if(profilePersoUser.value.firstname !== '' && profilePersoUser.value.firstname) {
         firstname = profilePersoUser.value.firstname;
@@ -136,6 +137,7 @@ export class ProfilePage {
         firstname = this.user.firstname;
       }
 
+      // lastname
       let lastname: string;
       if(profilePersoUser.value.lastname !== '' && profilePersoUser.value.lastname) {
         lastname = profilePersoUser.value.lastname;
@@ -144,6 +146,7 @@ export class ProfilePage {
         lastname = this.user.lastname;
       }
 
+      // age
       let age: string;
       if(profilePersoUser.value.age !== '' && profilePersoUser.value.age) {
         age = profilePersoUser.value.age;
@@ -152,6 +155,7 @@ export class ProfilePage {
         age = this.user.age;
       }
 
+      // phone
       let phone: string;
       if(profilePersoUser.value.phone !== '' && profilePersoUser.value.phone) {
         phone = profilePersoUser.value.phone;
@@ -160,6 +164,7 @@ export class ProfilePage {
         phone = this.user.phone;
       }
 
+      // lookingForGender
       let lookingForGender: string;
       if(profilePersoUser.value.lookingForGender !== '' && profilePersoUser.value.lookingForGender) {
         lookingForGender = profilePersoUser.value.lookingForGender;
