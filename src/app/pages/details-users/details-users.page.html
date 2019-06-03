@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ user?.firstname.stringValue }} {{ user?.lastname.stringValue }}</ion-title>
+    <ion-button slot="end" fill="clear" (click)="dismiss()">
+      <ion-icon name="close" slot="icon-only"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  
+  <ion-card>
+    <ion-item id="item-header" class="bg-g">
+      <ion-avatar>
+        <ion-img  src="../../assets/imgs/avatar.png" alt=""></ion-img>
+        <h1 color="primary">{{ user?.firstname.stringValue }} {{ user?.lastname.stringValue }}</h1>
+      </ion-avatar>      
+    </ion-item>
+    <ion-card-content>
+      <ion-item>
+        <ion-icon name="call" item-left class="ion-margin-end"></ion-icon>
+        <p>{{ user?.phone.integerValue }}</p>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="mail" item-left class="ion-margin-end"></ion-icon>
+        <p>{{ user?.email.stringValue }}</p>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="calendar" item-left class="ion-margin-end"></ion-icon>
+        <p>{{ user?.age.integerValue }} years old</p>
+      </ion-item>
+
+      <!-- Buttons -->
+      <ion-row id="button-wrapper">
+        <ion-col size="6" class="ion-text-center">
+            <ion-button id="cancel-button" shape="round" color="primary" size="small" (click)="dismiss()">
+              <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-col>
+        <ion-col size="6" class="ion-text-center">
+          <ion-button id="favorites-button" shape="round" color="success" size="small" (click)="addToFavorites()">
+            <!--<ion-icon name="heart-empty"></ion-icon>-->
+            <ion-icon [name]="isFavorite ? 'heart' : 'heart-empty'"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

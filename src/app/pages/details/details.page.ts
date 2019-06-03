@@ -24,6 +24,7 @@ export class DetailsPage implements OnInit {
   ngOnInit() { }
 
   ionViewWillEnter() {
+    // Save each favorites added
     this.people = this.peoplesService.getPeople();
       this.favoritesService.getAllFavorites().get()
       .then((favoritesSnapshot) => {

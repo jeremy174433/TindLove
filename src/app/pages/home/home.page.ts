@@ -7,6 +7,7 @@ import { DetailsPage } from '../details/details.page';
 
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
+import { DetailsUsersPage } from '../details-users/details-users.page';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +21,7 @@ export class HomePage {
   apiByF = this.peoplesService.getByGenderF();
   data: any;
   usersList = [];
+  dataRealUsers: any;
   private peoples = [];
   public lookingForGender;
 
@@ -113,8 +115,12 @@ export class HomePage {
   }
 
   // Display details page modal
-  async detailsRealPeople() {
-    console.log('Details real user');
+  async detailsRealPeople(user) {
+    const modal = await this.modalCtrl.create({
+      component: DetailsUsersPage,
+      componentProps: { user: user }
+    });
+    return await modal.present();
   }
 
   // Pull to refresh

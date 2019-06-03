@@ -12,14 +12,17 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 
 import { DetailsPage } from './pages/details/details.page';
+import { DetailsUsersPage } from './pages/details-users/details-users.page';
 
 @NgModule({
   declarations: [
     AppComponent, 
-    DetailsPage
+    DetailsPage,
+    DetailsUsersPage
   ],
   entryComponents: [
-    DetailsPage
+    DetailsPage,
+    DetailsUsersPage
   ],
   imports: [
     BrowserModule, 

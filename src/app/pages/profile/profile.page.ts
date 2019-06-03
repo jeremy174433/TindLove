@@ -30,6 +30,7 @@ export class ProfilePage {
     this.profilePersoUser = this.formBuilder.group({
       firstname: [ '', Validators.compose([Validators.required]) ],
       lastname: [ '', Validators.compose([Validators.required]) ],
+      gender: [ '', Validators.compose([Validators.required]) ],
       age: [ '', Validators.compose([Validators.required]) ],
       phone: [ '', Validators.compose([Validators.required]) ],
       lookingForGender: [ '', Validators.compose([Validators.required]) ]
@@ -146,6 +147,15 @@ export class ProfilePage {
         lastname = this.user.lastname;
       }
 
+      // lastname
+      let gender: string;
+      if(profilePersoUser.value.gender !== '' && profilePersoUser.value.gender) {
+        gender = profilePersoUser.value.gender;
+      }
+      else {
+        gender = this.user.gender;
+      }
+
       // age
       let age: string;
       if(profilePersoUser.value.age !== '' && profilePersoUser.value.age) {
@@ -176,9 +186,10 @@ export class ProfilePage {
       this.loading.present();
       setTimeout(() => {
         this.loading.dismiss();
-        this.profileService.updateProfile(firstname, lastname, age, phone, lookingForGender);
+        this.profileService.updateProfile(firstname, lastname, gender, age, phone, lookingForGender);
         this.user.firstname = firstname;
         this.user.lastname = lastname;
+        this.user.gender = gender;
         this.user.age = age;
         this.user.phone = phone;
         this.user.lookingForGender = lookingForGender;

@@ -10,11 +10,12 @@ export class ProfileService {
   constructor() { }
 
   // Save profile update
-  updateProfile(firstname: string, lastname: string, age: string, phone: string, lookingForGender: string) {
+  updateProfile(firstname: string, lastname: string, gender:string, age: string, phone: string, lookingForGender: string) {
     var userID = firebase.auth().currentUser.uid;
     return firebase.firestore().doc('userProfile/' + userID).update({ 
       firstname: firstname, 
       lastname: lastname,
+      gender: gender,
       age: age,
       phone: phone, 
       lookingForGender: lookingForGender
