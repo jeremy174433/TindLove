@@ -1,5 +1,7 @@
 import { Component, OnInit, Input  } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
+
+import { FavoritesService } from '../../services/crud/favorites.service';
 
 @Component({
   selector: 'app-details-users',
@@ -9,10 +11,23 @@ import { ModalController } from '@ionic/angular';
 export class DetailsUsersPage implements OnInit {
 
   @Input() user: any;
+  isFavorite: boolean;
+  favoritesList = [];
 
-  constructor(private modalCtrl: ModalController) { }
+  constructor(
+    private modalCtrl: ModalController,
+    private toastController: ToastController,
+    private favoritesService: FavoritesService) { }
 
   ngOnInit() { }
+
+  ionViewWillEnter() {
+    // Add correctly each favorites added
+    this.favoritesService.getAllFavorites().get()
+      .then((favoritesSnapshot) => {
+        this.favoritesList = favoritesSnapshot.data().users;
+    })
+  }
 
   // Dismiss details page
   dismiss() { 
@@ -20,8 +35,20 @@ export class DetailsUsersPage implements OnInit {
   }
 
   // Add to favorites
-  addToFavorites() {
-    console.log('Add to favorites');
+  async addToFavorites(user) {
+    // this.favorite = !this.favorite; // Icon background favorite
+    this.favoritesService.addNewRealFavorite(user, this.favoritesList);
+    this.isFavorite = true;
+    this.modalCtrl.dismiss();
+
+    const toast = await this.toastController.create({
+      message: 'Added to favorites',
+      showCloseButton: true,
+      position: 'bottom',
+      closeButtonText: 'x',
+      duration: 600
+    });
+    toast.present();
   }
 
 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { People } from 'src/app/models/peoples';
+import { User } from 'src/app/models/users';
 
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
@@ -21,7 +22,7 @@ export class FavoritesService {
     });
   }
 
-  // Save favorite
+  // Save favorite API users
   addNewFavorite(people: People, peoples: People[]): Promise <any> {
     // First add if not exist
     return new Promise <any> ((resolve, reject) => {
@@ -39,6 +40,27 @@ export class FavoritesService {
         .catch((err) => { reject(err); });
       }
       resolve(peoples);
+    });
+  }
+
+  // Save favorite real users
+  addNewRealFavorite(user: User, users: User[]): Promise <any> {
+    // First add if not exist
+    return new Promise <any> ((resolve, reject) => {
+      if (users === undefined) {
+        users = [user];
+        this.userFavorites.set({peoples: users})
+        .then(() => { resolve(users); })
+        .catch((err) => { reject(err); });
+      }
+      // Next adds
+      else {
+        users.push(user);
+        this.userFavorites.update({users})
+        .then(() => { resolve(users); })
+        .catch((err) => { reject(err); });
+      }
+      resolve(users);
     });
   }
 

@@ -24,7 +24,10 @@ export class AuthService {
         email: email,
         lookingForGender: 'All' 
       });
-      firebase.firestore().doc(`/userFavorites/${newUserCredential.user.uid}`).set({ peoples: [] });
+      firebase.firestore().doc(`/userFavorites/${newUserCredential.user.uid}`).set({ 
+        peoples: [],
+        users: []
+      });
     })
     .catch(error => {
       console.error(error);

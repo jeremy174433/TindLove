@@ -13,6 +13,7 @@ export class FavoritesPage {
 
   data: boolean;
   favoritesList = [];
+  favoritesListRealUsers = [];
   peopleList = []
 
   constructor(
@@ -24,13 +25,21 @@ export class FavoritesPage {
   // Get favorites list
   ionViewWillEnter() {
     this.data = true;
+    // API users
     this.favoritesService.getAllFavorites().get()
     .then((favoritesSnapshot) => {
       this.favoritesList = favoritesSnapshot.data().peoples;
       return this.favoritesList.reverse();
     })
-    .catch(() => {
+    // Real users
+    this.favoritesService.getAllFavorites().get()
+    .then((realFavoritesSnapshot) => {
+      this.favoritesListRealUsers = realFavoritesSnapshot.data().users;
+      return this.favoritesListRealUsers.reverse();
+    })
+    .catch((err) => {
       this.data = false;
+      console.log('No favorites => ', err);
     });
   }
 

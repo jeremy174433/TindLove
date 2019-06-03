@@ -8,7 +8,6 @@ import * as firebase from 'firebase/app';
 export class ProfileService {
 
   constructor() { }
-
   // Save profile update
   updateProfile(firstname: string, lastname: string, gender:string, age: string, phone: string, lookingForGender: string) {
     var userID = firebase.auth().currentUser.uid;

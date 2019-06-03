@@ -128,7 +128,7 @@ export class HomePage {
     setTimeout(() => {
       this.displayData();
       event.target.complete();
-    }, 500);
+    }, 600);
   }
   
   // Infinite scroll
