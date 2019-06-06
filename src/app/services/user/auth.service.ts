@@ -23,6 +23,7 @@ export class AuthService {
       firebase.firestore().doc(`/userProfile/${newUserCredential.user.uid}`).set({ 
         email: email,
         id: newUserCredential.user.uid,
+        image: '',
         lookingForGender: 'All' 
       });
       firebase.firestore().doc(`/userFavorites/${newUserCredential.user.uid}`).set({ 

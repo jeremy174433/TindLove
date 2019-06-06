@@ -3,10 +3,10 @@ export class User {
     age: number;
     email: string;
     gender: string;
-    firstname: string;
-    lastname: string;
+    fullname: string;
     lookingForGender: string;
     phone: number;
+    image: string;
 }
 
 let items = new User();

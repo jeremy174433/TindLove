@@ -24,9 +24,10 @@
             <ion-item>
               <ion-card-content>
                 <ion-avatar>
-                  <ion-img src="../../assets/imgs/avatar.png" alt=""></ion-img>
+                  <ion-img src="../../assets/imgs/avatar.png" *ngIf="!favoritesUser?.image.stringValue" alt=""></ion-img>
+                  <ion-img [src]="favoritesUser?.image.stringValue" *ngIf="favoritesUser?.image.stringValue" alt=""></ion-img>
                 </ion-avatar>
-                <h2>{{ favoritesUser?.firstname.stringValue }} {{ favoritesUser?.lastname.stringValue }}</h2>
+                <h2>{{ favoritesUser?.fullname.stringValue }}</h2>
                 <p>{{ favoritesUser?.email.stringValue }}</p>
                 <p>{{ favoritesUser?.phone.integerValue }}</p>
                 <p>{{ favoritesUser?.age.integerValue }} years old</p>

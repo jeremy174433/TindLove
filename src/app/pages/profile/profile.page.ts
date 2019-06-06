@@ -28,17 +28,36 @@ export class ProfilePage {
     private formBuilder: FormBuilder) { 
 
     this.profilePersoUser = this.formBuilder.group({
-      firstname: [ '', Validators.compose([Validators.required]) ],
-      lastname: [ '', Validators.compose([Validators.required]) ],
+      image: [ '', Validators.compose([Validators.required]) ],
+      fullname: [ '', Validators.compose([Validators.required]) ],
       gender: [ '', Validators.compose([Validators.required]) ],
       age: [ '', Validators.compose([Validators.required]) ],
       phone: [ '', Validators.compose([Validators.required]) ],
       lookingForGender: [ '', Validators.compose([Validators.required]) ]
     });
-
   }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    document.querySelector('#file').addEventListener('change', this.handleFileSelect, false);
+  }
+
+  handleFileSelect(image) {
+
+    let files = image.target.files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(files);
+    reader.onload = () => {
+      console.log(reader.result);
+      const inputBase64 = document.getElementById('base64code') as HTMLInputElement;
+      const res: string = reader.result as string;
+      inputBase64.value = res;
+    };
+
+    reader.onerror = (err) => {
+      console.log(err);
+    };
+
+  }
 
   // Get user data
   ionViewWillEnter() {
@@ -128,23 +147,37 @@ export class ProfilePage {
         closeButtonText: 'x',
         duration: 3000
       });
-      
-      // firstname
-      let firstname: string;
-      if(profilePersoUser.value.firstname !== '' && profilePersoUser.value.firstname) {
-        firstname = profilePersoUser.value.firstname;
+
+      // image
+      let image: string;
+      if(profilePersoUser.value.image !== '' && profilePersoUser.value.image) {
+
+        /*
+        var text = '';
+        var possible = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        for (var i = 0; i < 64; i++) {
+          text += possible.charAt(Math.floor(Math.random() * possible.length));
+        }
+
+        profilePersoUser.value.image = 'data:image/jpeg;base64,' + text + '=';
+        */
+        //image = profilePersoUser.value.image;
+        //console.log(image);
+
+        image = profilePersoUser.value.image;
+         
       }
       else {
-        firstname = this.user.firstname;
+        image = this.user.image;
       }
 
-      // lastname
-      let lastname: string;
-      if(profilePersoUser.value.lastname !== '' && profilePersoUser.value.lastname) {
-        lastname = profilePersoUser.value.lastname;
+      // fullname
+      let fullname: string;
+      if(profilePersoUser.value.fullname !== '' && profilePersoUser.value.fullname) {
+        fullname = profilePersoUser.value.fullname;
       }
       else {
-        lastname = this.user.lastname;
+        fullname = this.user.fullname;
       }
 
       // lastname
@@ -186,9 +219,9 @@ export class ProfilePage {
       this.loading.present();
       setTimeout(() => {
         this.loading.dismiss();
-        this.profileService.updateProfile(firstname, lastname, gender, age, phone, lookingForGender);
-        this.user.firstname = firstname;
-        this.user.lastname = lastname;
+        this.profileService.updateProfile(image, fullname, gender, age, phone, lookingForGender);
+        this.user.image = image;
+        this.user.fullname = fullname;
         this.user.gender = gender;
         this.user.age = age;
         this.user.phone = phone;
