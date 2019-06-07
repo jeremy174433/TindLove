@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { LoadingController, AlertController } from '@ionic/angular';
 import { FavoritesService } from '../../services/crud/favorites.service';
 
 import 'firebase/firestore';
@@ -12,17 +12,19 @@ import 'firebase/firestore';
 export class FavoritesPage {
 
   data: boolean;
+  private loading: HTMLIonLoadingElement;
   favoritesList = [];
   favoritesListRealUsers = [];
 
   constructor(
+    private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     private favoritesService: FavoritesService) { }
 
   ngOnInit() { }
 
   // Get favorites list
-  ionViewWillEnter() {
+  async ionViewWillEnter() {
     this.data = true;
     // API users
     this.favoritesService.getAllFavorites().get()
@@ -96,6 +98,8 @@ export class FavoritesPage {
   // Delete all peoples
   async deleteAllPeoples(): Promise<void> {
 
+    this.loading = await this.loadingCtrl.create();
+
     const alert = await this.alertCtrl.create({
       header: 'WARNING 💣',
       message: 'Do you really want to delete all the favorites from your list ?',
@@ -107,10 +111,14 @@ export class FavoritesPage {
         {
           text: 'Yes',
           handler: () => {
+            this.loading.present();
             this.favoritesService.deleteAll()
             .then((res) => {
-              this.favoritesList = res;
-              this.favoritesListRealUsers = res;
+              setTimeout(() => {
+                this.favoritesList = res;
+                this.favoritesListRealUsers = res;
+                this.loading.dismiss();
+              }, 1000);
             })
             .catch((err) => {
               console.log(err);

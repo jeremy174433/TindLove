@@ -1,12 +1,12 @@
 export class User {
-    id: string;
     age: number;
     email: string;
-    gender: string;
     fullname: string;
+    gender: string;
+    id: string;
+    image: string;
     lookingForGender: string;
     phone: number;
-    image: string;
 }
 
 let items = new User();

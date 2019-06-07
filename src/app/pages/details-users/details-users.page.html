@@ -32,7 +32,7 @@
       </ion-item>
 
       <!-- Buttons -->
-      <ion-row id="button-wrapper">
+      <ion-row id="button-wrapper" *ngIf="user?.fullname.stringValue !== 'Admin TindLove'">
         <ion-col size="6" class="ion-text-center">
             <ion-button id="cancel-button" shape="round" color="primary" size="small" (click)="dismiss()">
               <ion-icon name="close"></ion-icon>

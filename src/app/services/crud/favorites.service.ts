@@ -12,13 +12,11 @@ import 'firebase/auth';
 export class FavoritesService {
   
   public currentUser;
-  public userFavorites: firebase.firestore.DocumentReference;
 
   constructor() {
     firebase.auth().onAuthStateChanged((user: firebase.User) => {
       if (user) {
         this.currentUser = user;
-        this.userFavorites = firebase.firestore().doc(`userFavorites/${user.uid}`);
       }
     });
   }
@@ -67,16 +65,18 @@ export class FavoritesService {
   addNewFavorite(people: People, peoples: People[]): Promise <any> {
     // First add if not exist
     return new Promise <any> ((resolve, reject) => {
-      if (peoples === undefined) {
+      const userID = firebase.auth().currentUser.uid;
+      if (peoples === undefined || peoples === null) {
         peoples = [people];
-        this.userFavorites.set({peoples: peoples})
+        console.log([people]);
+        firebase.firestore().doc('userFavorites/' + userID).set({peoples: peoples})
         .then(() => { resolve(peoples); })
         .catch((err) => { reject(err); });
       }
       // Next adds
       else {
         peoples.push(people);
-        this.userFavorites.update({peoples})
+        firebase.firestore().doc('userFavorites/' + userID).update({peoples})
         .then(() => { resolve(peoples); })
         .catch((err) => { reject(err); });
       }
@@ -109,16 +109,17 @@ export class FavoritesService {
   addNewRealFavorite(user: User, users: User[]): Promise <any> {
     // First add if not exist
     return new Promise <any> ((resolve, reject) => {
+      const userID = firebase.auth().currentUser.uid;
       if (users === undefined) {
         users = [user];
-        this.userFavorites.set({users: users})
+        firebase.firestore().doc('userFavorites/' + userID).set({users: users})
         .then(() => { resolve(users); })
         .catch((err) => { reject(err); });
       }
       // Next adds
       else {
         users.push(user);
-        this.userFavorites.update({users})
+        firebase.firestore().doc('userFavorites/' + userID).update({users})
         .then(() => { resolve(users); })
         .catch((err) => { reject(err); });
       }

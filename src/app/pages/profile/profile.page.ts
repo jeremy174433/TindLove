@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../services/user/auth.service';
-import { ProfileService } from '../../services/crud/profile.service';
-import { UserService } from '../../services/user/user.service';
 import { LoadingController, AlertController, ToastController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
+import { AuthService } from '../../services/user/auth.service';
+import { UserService } from '../../services/user/user.service';
+import { ProfileService } from '../../services/crud/profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -28,7 +29,7 @@ export class ProfilePage {
     private formBuilder: FormBuilder) { 
 
     this.profilePersoUser = this.formBuilder.group({
-      image: [ '', Validators.compose([Validators.required]) ],
+      image: [ '' ],
       fullname: [ '', Validators.compose([Validators.required]) ],
       gender: [ '', Validators.compose([Validators.required]) ],
       age: [ '', Validators.compose([Validators.required]) ],

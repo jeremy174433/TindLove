@@ -90,7 +90,7 @@ export class HomePage {
       docLists.forEach((doc: any, index) => {
         // Push users list
         this.usersList.push(doc._document.proto.fields);
-
+    
         // Splice current user
         if(userID === doc.id) {
           this.usersList.splice(index, 1);

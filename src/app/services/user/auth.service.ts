@@ -21,10 +21,14 @@ export class AuthService {
     return firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((newUserCredential: firebase.auth.UserCredential) => {
       firebase.firestore().doc(`/userProfile/${newUserCredential.user.uid}`).set({ 
+        age: '',
         email: email,
+        fullname: '',
+        gender: '',
         id: newUserCredential.user.uid,
         image: '',
-        lookingForGender: 'All' 
+        lookingForGender: 'All',
+        phone: ''
       });
       firebase.firestore().doc(`/userFavorites/${newUserCredential.user.uid}`).set({ 
         peoples: [],
