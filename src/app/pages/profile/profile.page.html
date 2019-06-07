@@ -8,88 +8,15 @@
 
   <div id="wrapper">
 
-    <h1>My personal informations</h1>
-
-    <!-- Table infos -->
-    <ion-grid id="table-profile-infos">
-      <ion-row>
-
-        <ion-col size="6" size-md="4" class="first-col">
-          <span>Email</span>
-        </ion-col>
-        <ion-col size="6" size-md="8" class="right-col">
-          <ion-label color="primary">{{ user?.email }}</ion-label>
-        </ion-col>
-
-        <ion-col size="6" size-md="4" class="first-col">
-          <span>Fullname</span>
-        </ion-col>
-        <ion-col size="6" size-md="8" class="right-col">
-          <ion-label color="primary">{{ user?.fullname }}</ion-label>
-        </ion-col>
-
-        <ion-col size="6" size-md="4" class="first-col">
-          <span>Gender</span>
-        </ion-col>
-        <ion-col size="6" size-md="8" class="right-col">
-          <ion-label color="primary">{{ user?.gender }}</ion-label>
-        </ion-col>
-
-        <ion-col size="6" size-md="4" class="first-col">
-          <span>Age</span>
-        </ion-col>
-        <ion-col size="6" size-md="8" class="right-col">
-          <ion-label color="primary">{{ user?.age }}</ion-label>
-        </ion-col>
-
-        <ion-col size="6" size-md="4" class="first-col">
-          <span>Phone number</span>
-        </ion-col>
-        <ion-col size="6" size-md="8" class="right-col">
-          <ion-label color="primary">{{ user?.phone }}</ion-label>
-        </ion-col>
-
-        <ion-col size="6" size-md="4" class="last-col first-col">
-          <span>Looking for gender</span>
-        </ion-col>
-        <ion-col size="6" size-md="8" class="last-col right-col">
-          <ion-label color="primary">{{ user?.lookingForGender }}</ion-label>
-        </ion-col>
-
-      </ion-row>
-    </ion-grid>
-
-    <!-- Buttons -->
-    <div class="ion-margin-top ion-text-end">
-      <ion-button (click)="logoutUser()">
-        <ion-icon slot="start" name="log-out"></ion-icon>
-        Log out
-      </ion-button>
-
-      <ion-button (click)="deleteAccount()">
-        <ion-icon slot="start" name="remove-circle"></ion-icon>
-        Delete account
-      </ion-button>
-
-      <ion-button routerLink="/privacy-policy">
-        <ion-icon slot="start" name="clipboard"></ion-icon>
-        Privacy Policy
-      </ion-button>
-    </div>
-
-    <ion-avatar *ngIf="user?.image">
-      <ion-img [src]="user?.image" alt="user?.image"></ion-img>
-    </ion-avatar>
-
     <!-- Profile Form -->
     <form [formGroup]="profilePersoUser">
-
       <h2>My profile :</h2>
 
-      <ion-item>
-        <ion-input type="file" id="file" accept=".jpg, .jpeg, .png"></ion-input>
-        <ion-input formControlName="image" type="hidden" id="base64code"></ion-input>
-      </ion-item>
+      <ion-label for="file" id="file-label">
+        <ion-img [src]="user?.image" id="img-preview" alt=""></ion-img>
+        <ion-input type="file" name="file" id="file" accept=".jpg, .jpeg, .png"></ion-input>
+      </ion-label>
+      <ion-input formControlName="image" type="hidden" id="base64code" value="{{ user?.image }}"></ion-input>
 
       <ion-item>
         <ion-label position="floating" color="primary">
@@ -141,10 +68,30 @@
       </ion-item>
 
       <div class="ion-text-end">
-        <ion-button (click)="saveProfile(profilePersoUser)" [disabled]="!profilePersoUser.valid" class="ion-margin-top">Save update</ion-button>
+        <ion-button (click)="saveProfile(profilePersoUser)" [disabled]="!profilePersoUser.valid || profilePersoUser.untouched" class="ion-margin-top">Save update</ion-button>
       </div>
-
     </form>
+
+    <!-- Buttons -->
+    <div class="ion-margin-top ion-text-end">
+
+      <div class="separator"></div>
+
+      <ion-button (click)="logoutUser()">
+        <ion-icon slot="start" name="log-out"></ion-icon>
+        Log out
+      </ion-button>
+
+      <ion-button (click)="deleteAccount()">
+        <ion-icon slot="start" name="remove-circle"></ion-icon>
+        Delete account
+      </ion-button>
+
+      <ion-button routerLink="/privacy-policy">
+        <ion-icon slot="start" name="clipboard"></ion-icon>
+        Privacy Policy
+      </ion-button>
+    </div>
 
   </div>
 

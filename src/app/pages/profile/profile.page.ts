@@ -37,17 +37,25 @@ export class ProfilePage {
     });
   }
 
-  ngOnInit() { 
-    document.querySelector('#file').addEventListener('change', this.handleFileSelect, false);
+  ngOnInit() {
+    // Launch FileReader
+    document.getElementById('file').addEventListener('change', this.handleFileSelect, false);
   }
 
+  // Define profile image
   handleFileSelect(image) {
-
     let files = image.target.files[0];
     let reader = new FileReader();
     reader.readAsDataURL(files);
     reader.onload = () => {
-      console.log(reader.result);
+
+      // Image preview after upload
+      const imgTag = document.getElementById('img-preview') as HTMLInputElement;
+      const imgBase64: string = reader.result as string;
+      const imgPreview = imgTag.setAttribute('src', imgBase64);
+      imgPreview;
+      
+      // Put base64 code on the hidden input
       const inputBase64 = document.getElementById('base64code') as HTMLInputElement;
       const res: string = reader.result as string;
       inputBase64.value = res;
@@ -56,7 +64,6 @@ export class ProfilePage {
     reader.onerror = (err) => {
       console.log(err);
     };
-
   }
 
   // Get user data
@@ -134,7 +141,7 @@ export class ProfilePage {
 
   // Profile informations
   async saveProfile(profilePersoUser: FormGroup) {
-    if (!profilePersoUser.valid) {
+    if (!profilePersoUser.valid || profilePersoUser.untouched) {
       console.log('Need to complete the form, current value: ', profilePersoUser.value);
     }
     else {
@@ -151,21 +158,7 @@ export class ProfilePage {
       // image
       let image: string;
       if(profilePersoUser.value.image !== '' && profilePersoUser.value.image) {
-
-        /*
-        var text = '';
-        var possible = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-        for (var i = 0; i < 64; i++) {
-          text += possible.charAt(Math.floor(Math.random() * possible.length));
-        }
-
-        profilePersoUser.value.image = 'data:image/jpeg;base64,' + text + '=';
-        */
-        //image = profilePersoUser.value.image;
-        //console.log(image);
-
         image = profilePersoUser.value.image;
-         
       }
       else {
         image = this.user.image;
